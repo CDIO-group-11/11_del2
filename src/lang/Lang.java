@@ -1,12 +1,19 @@
 package lang;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Lang {
   private String text[][];
   public String getText(Language lang, int textIndex) {
     if(text[lang.ordinal()] == null){
-      generate(lang);
+      try {
+        generate(lang);
+      } catch (FileNotFoundException e) {
+        System.out.println("the file supposed to be stored at ./Lang/" + lang.name() + ".lang is missing\nthis file should contain the language: " + lang.name() + "\nplease choose a different language");
+      }
     }
     return text[lang.ordinal()][textIndex];
   }
