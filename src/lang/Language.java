@@ -3,7 +3,7 @@ package lang;
 import java.util.Scanner;
 
 public class Language { //using ISO 639-1
-  enum LanguageCode{
+  public enum LanguageCode{
     da,
     en
   }
