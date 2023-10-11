@@ -8,8 +8,8 @@ import java.util.Scanner;
 import lang.Language.LanguageCode;
 
 public class Lang {
-  private String text[][];
-  public String getText(LanguageCode lang, int textIndex) {
+  private static String text[][];
+  public static String getText(LanguageCode lang, int textIndex) {
     if(text[lang.ordinal()] == null){
       try {
         generate(lang);
@@ -19,7 +19,7 @@ public class Lang {
     }
     return text[lang.ordinal()][textIndex];
   }
-  private void generate(LanguageCode lang) throws FileNotFoundException {
+  private static void generate(LanguageCode lang) throws FileNotFoundException {
     ArrayList<String> tempText = new ArrayList<String>();
     Scanner languageReader = new Scanner(new File("./Lang/" + lang.name() + ".lang"));
     while(languageReader.hasNextLine()){
