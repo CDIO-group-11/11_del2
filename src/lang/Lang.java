@@ -5,9 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import lang.Language.LanguageCode;
+
 public class Lang {
   private String text[][];
-  public String getText(Language lang, int textIndex) {
+  public String getText(LanguageCode lang, int textIndex) {
     if(text[lang.ordinal()] == null){
       try {
         generate(lang);
@@ -17,7 +19,7 @@ public class Lang {
     }
     return text[lang.ordinal()][textIndex];
   }
-  private void generate(Language lang) throws FileNotFoundException {
+  private void generate(LanguageCode lang) throws FileNotFoundException {
     ArrayList<String> tempText = new ArrayList<String>();
     Scanner languageReader = new Scanner(new File("./Lang/" + lang.name() + ".lang"));
     while(languageReader.hasNextLine()){
