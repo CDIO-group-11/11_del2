@@ -10,9 +10,13 @@ public class Lang {
     }
     return text[lang.ordinal()][textIndex];
   }
-  private void generate(Language lang) {
+  private void generate(Language lang) throws FileNotFoundException {
     ArrayList<String> tempText = new ArrayList<String>();
-    //reader
+    Scanner languageReader = new Scanner(new File("./Lang/" + lang.name() + ".lang"));
+    while(languageReader.hasNextLine()){
+      tempText.add(languageReader.nextLine());
+    }
+    languageReader.close();
     text[lang.ordinal()] = (String[]) tempText.toArray();
   }
 }
