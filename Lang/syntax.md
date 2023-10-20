@@ -5,12 +5,12 @@ this file must then be placed in the folder Lang/<br>
 this is the same location as this file is found.
 <br><br>
 ## Language
-- `declarator syntax` first you must declare your declarator, as the lang file allows for the writer/user to choose the symbols that denominate different parts of the program, of course defaults are written in. <br>To use defaults either leave a line blank to ignore all configuration on all options on that line or add spaces instead of the specific char to ignore it's option.
+- `declarator syntax` first you must declare your declarator, as the lang file allows for the writer/user to choose the symbols that denominate different parts of the program, of course defaults are written in. <br>To use defaults either leave a line blank to ignore all configuration on all options on that line or leave a part blank to use default for that option.<br>if only the first  option is to be used all spaces must still be written!
 
   - `tile`<br>
   default = '@'<br>
   described on line 1 word 1<br>
-  default = '12'<br>
+  default = '11'<br>
   number of tiles (as number) line 1 word 2
   - `User interface`<br>
   default = '&'<br>
