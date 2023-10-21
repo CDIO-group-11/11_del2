@@ -44,7 +44,8 @@ this is the same location as this file is found.
     | player 1's total gold       | &gold1  |
     | player 2's total gold       | &gold2  |
     | turn number                 | &turn   |
-    | current tile text           | &tile   |
+    | current tile text           | &tileT  |
+    | current tile nr             | &tileNR |
 - `error messages`
   - these are not strictly necessary and are only meant for debugging and should not (unless something goes wrong) be printed, they are only meant to allow further development using your translated error messages
   - each line must start with the start descriptor
