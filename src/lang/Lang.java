@@ -50,8 +50,8 @@ public class Lang {
           descriptorErrorEnd = descriptor.charAt(1);
         }
       }
-      String currentLine = languageReader.nextLine();
-      while(true){//read tiles
+      String currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\u0400";
+      while(!currentLine.equals("\u0400")){//read tiles
         if(!currentLine.split(" ")[0].contains(descriptorTile)){
           break;
         }
@@ -67,7 +67,7 @@ public class Lang {
         .replaceFirst
         (currentLine.split(" ")[0] + " ", "")
         .replace(descriptorTile, "" + TileValue);
-        languageReader.nextLine();
+        currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\u0400";
       }
       UserInterface[lang.ordinal()] = "";
       while(true){
@@ -75,13 +75,19 @@ public class Lang {
           break;
         }
         UserInterface[lang.ordinal()] += setTags(currentLine,descriptorInterface);
-        languageReader.nextLine();
+        currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\u0400";
       }
       while (true) {
-        // if(!currentLine.charAt(){
-        //   break;
-        // }
-        
+        if(currentLine.charAt(0) == descriptorErrorStart){
+          String[] all = currentLine.split(descriptorErrorEnd + "");
+          String name = all[0];
+          String message = "";
+          for (int i = 1; i < all.length; i++) {
+            message += all[i] + (i + 1 < all.length ? descriptorErrorStart + "" + descriptorErrorEnd : "");
+          }
+          errors.put(name, message);
+        }
+        currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\u0400";
       }
     } catch (FileNotFoundException e) {
       System.out.println("lang not found\n" +
@@ -91,16 +97,16 @@ public class Lang {
     }
   }
   private static String setTags (String input, String descriptor){//TODO write as two arrays and a loop
-    input.replace(descriptor + "player", "\u0400");
-    input.replace(descriptor + "die1"  , "\u0401");
-    input.replace(descriptor + "die2"  , "\u0402");
-    input.replace(descriptor + "sum"   , "\u0403");
-    input.replace(descriptor + "gold"  , "\u0404");
-    input.replace(descriptor + "gold1" , "\u0405");
-    input.replace(descriptor + "gold2" , "\u0406");
-    input.replace(descriptor + "turn"  , "\u0407");
-    input.replace(descriptor + "tileT" , "\u0408");
-    input.replace(descriptor + "tileNR", "\u0409");
+    input.replace(descriptor + "player", "\u0401");
+    input.replace(descriptor + "die1"  , "\u0402");
+    input.replace(descriptor + "die2"  , "\u0403");
+    input.replace(descriptor + "sum"   , "\u0404");
+    input.replace(descriptor + "gold"  , "\u0405");
+    input.replace(descriptor + "gold1" , "\u0406");
+    input.replace(descriptor + "gold2" , "\u0407");
+    input.replace(descriptor + "turn"  , "\u0408");
+    input.replace(descriptor + "tileT" , "\u0409");
+    input.replace(descriptor + "tileNR", "\u040a");
     return setColor(input, descriptor);
   }
   private static String setColor(String input, String descriptor){//TODO make a loop
@@ -125,6 +131,7 @@ public class Lang {
   public static void error(Exception e){
     String[] out = errors.get(e.getClass().getSimpleName()).split("[]");
     if(out == null){
+      System.out.println("no translated message");
       e.printStackTrace();
       return;
     }
