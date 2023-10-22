@@ -15,7 +15,6 @@ public class Lang {
   private static HashMap<String,String> errors;
   public static void loadLang(LanguageCode lang){
     String path = "./Lang/" + lang.name() + ".lang";
-    ArrayList<String> tempText = new ArrayList<String>();
     Scanner languageReader;
     try {
       languageReader = new Scanner(new File(path));
