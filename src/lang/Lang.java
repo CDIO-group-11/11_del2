@@ -51,6 +51,10 @@ public class Lang {
       }
       String currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\u0400";
       while(!currentLine.equals("\u0400")){//read tiles
+        if(currentLine.equals("")) {
+          currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\u0400";
+          continue;
+        }
         if(!currentLine.split(" ")[0].contains(descriptorTile)){
           break;
         }
@@ -69,14 +73,22 @@ public class Lang {
         currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\u0400";
       }
       UserInterface[lang.ordinal()] = "";
-      while(true){
+      while(!currentLine.equals("\u0400")){
+        if(currentLine.equals("")) {
+          currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\u0400";
+          continue;
+        }
         if(!currentLine.split(" ")[0].contains(descriptorInterface)){
           break;
         }
         UserInterface[lang.ordinal()] += setTags(currentLine,descriptorInterface);
         currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\u0400";
       }
-      while (true) {
+      while (!currentLine.equals("\u0400")) {
+        if(currentLine.equals("")) {
+          currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\u0400";
+          continue;
+        }
         if(currentLine.charAt(0) == descriptorErrorStart){
           String[] all = currentLine.split(descriptorErrorEnd + "");
           String name = all[0];
