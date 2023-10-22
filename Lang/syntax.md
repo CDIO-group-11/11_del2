@@ -32,10 +32,11 @@ this is the same location as this file is found.
   - after the color add a space, this will then bbe written to the screen exactly as you see it note that each line in the file does not give a new line in the program
   - after the declarator any text written will be outputted exactly as written, with a few exceptions
     - all unicode characters between U+0400 and U+040F are reserved.
-    - the discriminator will be treated like a new line and therefore will not show up as a character but instead allows a new color. 
-    - all of the special data tags which can be accessed in sections<br>
+    - the discriminator will not be treated like a new line, instead it allows for use of tags withs are described in the table bellow. 
+    - all spaces before or after tags will be removed, to place a space around them use two spaces<br>
   - | tags                        | actions |
     |-----------------------------|---------|
+    | new line                    | &&      |
     | current player number       | &player |<#TODO all actions should be in `this`>
     | value of the first die      | &die1   |
     | value of the second die     | &die2   |
