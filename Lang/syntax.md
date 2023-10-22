@@ -31,7 +31,7 @@ this is the same location as this file is found.
   - then the color of the text, note that no space should be used between declarator and color, to use the consoles default color leave this blank  and instead add a space.
   - after the color add a space, this will then bbe written to the screen exactly as you see it note that each line in the file does not give a new line in the program
   - after the declarator any text written will be outputted exactly as written, with a few exceptions
-    - all unicode characters between U+0400 and U+040F are reserved.
+    - all unicode characters between U+E000 and U+EFFF are reserved.
     - the discriminator will not be treated like a new line, instead it allows for use of tags withs are described in the table bellow. 
     - all spaces before or after tags will be removed, to place a space around them use two spaces<br>
   - | tags                        | actions |
