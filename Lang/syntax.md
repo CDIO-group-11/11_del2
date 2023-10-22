@@ -1,25 +1,25 @@
 ## file structure
-To add a new language into the program a .lang file is to be used, these files must start with the language name (as written in src/lang/Lang.java) and end in .lang<br>
+To add a new language into the program a .lang file is to be used, these files must start with the language name (as written in `src/lang/Lang.java`) and end in .lang<br>
 nothing lese is to be added in the file name.<br>
-this file must then be placed in the folder Lang/<br>
+this file must then be placed in the folder `Lang/`<br>
 this is the same location as this file is found.
 <br><br>
 ## Language
 - `declarator syntax` first you must declare your declarator, as the lang file allows for the writer/user to choose the symbols that denominate different parts of the program, of course defaults are written in. <br>To use defaults either leave a line blank to ignore all configuration on all options on that line or leave a part blank to use default for that option.<br>if only the first  option is to be used all spaces must still be written!
 
   - `tile`<br>
-  default = '@'<br>
+  default = '<span style="color:lightgreen">@</span>'<br>
   described on line 1 word 1<br>
   default = '11'<br>
   number of tiles (as number) line 1 word 2
   - `User interface`<br>
-  default = '&'<br>
+  default = '<span style="color:lightgreen">&</span>'<br>
   described on line 1 word 3
   - `error message`<br>
   described on line 2<br>
-  default = [<br>
+  default = '<span style="color:lightgreen">[</span>'<br>
   char 1 = start<br><br>
-  default = ]<br>
+  default = '<span style="color:lightgreen">]</span>'<br>
   char 2 = end
 
 - `tiles` all tiles must be written from line 3.
