@@ -36,7 +36,7 @@ this is the same location as this file is found.
     - all of the special data tags which can be accessed in sections<br>
   - | tags                        | actions |
     |-----------------------------|---------|
-    | current player number       | &player |
+    | current player number       | &player |<#TODO all actions should be in `this`>
     | value of the first die      | &die1   |
     | value of the second die     | &die2   |
     | sum of dice                 | &sum    |
