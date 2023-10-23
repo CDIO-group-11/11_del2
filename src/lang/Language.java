@@ -22,7 +22,7 @@ public class Language { //using ISO 639-1
         scan.close();
         return LanguageCode.en;
         default:
-        System.out.println("not available; ikke tilgænlig");
+        System.out.println("not available; ikke tilgængelig");
       }
     }
   }
