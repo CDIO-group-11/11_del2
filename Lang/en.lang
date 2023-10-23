@@ -14,8 +14,14 @@
 @12 this is tile 11, located at 12, value = @
 
 & this is the first line of the UI
-&& player number = &red &player
+&& input: 
+&input&
+& player number = &red &player
 && &y should be yellow &
 && Player &player  rolled &die1  and &die2 .
 &  the sum is: &sum
+&& h
+&& h
+&& h
+&& h
 

@@ -13,6 +13,8 @@ public class Lang {
   private static String[][] tiles = new String[LanguageCode.values().length][];
   private static String[] UserInterface = new String[LanguageCode.values().length];
   private static HashMap<String,String> errors;
+  private static int inputStart = 0;
+  private static int inputHeight = 0;
   public static void loadLang(LanguageCode lang){
     String path = "./Lang/" + lang.name() + ".lang";
     Scanner languageReader;
@@ -73,10 +75,15 @@ public class Lang {
         currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\uE000";
       }
       UserInterface[lang.ordinal()] = "";
-      while(!currentLine.equals("\uE000")){//read inteface
+      while(!currentLine.equals("\uE000")){//read interface
         if(currentLine.equals("")) {
           currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\uE000";
           continue;
+        }
+        if(currentLine.contains(descriptorInterface + "input" + descriptorInterface)){
+          inputStart = currentLine.indexOf(descriptorInterface + "input" + descriptorInterface) + (descriptorInterface + "input" + descriptorInterface).length();
+          currentLine = currentLine.replace(descriptorInterface + "input" + descriptorInterface, descriptorInterface + descriptorInterface);
+          inputHeight = 1;
         }
         if(!currentLine.split(" ")[0].contains(descriptorInterface)){
           break;
@@ -117,6 +124,11 @@ public class Lang {
   };
   
   private static String setTags (String input, String descriptor){
+    int lineIndex = input.indexOf(descriptor + descriptor);
+    while(lineIndex != -1){
+      inputHeight++;
+      lineIndex = input.indexOf(descriptor + descriptor, lineIndex + 1);
+    }
     input = input.replace(descriptor + descriptor + " ", "\n");
     input = input.replace(descriptor + descriptor, "\n");
     for (int i = 0; i < tags[0].length; i++) {
@@ -142,8 +154,13 @@ public class Lang {
   public static String getUI(LanguageCode lang){
     return UserInterface[lang.ordinal()];
   }
-
-
+  public static String getTileText(LanguageCode lang, int tileNumber){
+    return tiles[lang.ordinal()][tileNumber-2];
+  }
+  public static void moveToInput(){
+    System.out.print("\r\033[" + inputHeight + "A");
+    System.out.print("\033[" + inputStart + "C");
+  }
 
 
 

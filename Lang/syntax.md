@@ -55,7 +55,7 @@ this is the same location as this file is found.
     | change text color yellow    |`&yellow`|
     | change text color purple    |`&purple`|
     | use default color           |`&reset `|
-  - lastly `&input&` may exist exactly once, this tag shows where the user will write their input, it will automatically add a new line after it
+  - lastly `&input&` may exist exactly once, this tag shows where the user will write their input, it will automatically add a new line after it, no new line tag should be written on the same line as the input tag.
 - `error messages`
   - these are not strictly necessary and are only meant for debugging and should not (unless something goes wrong) be printed, they are only meant to allow further development using your translated error messages
   - each line must start with the start descriptor
