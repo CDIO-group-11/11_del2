@@ -32,28 +32,30 @@ this is the same location as this file is found.
   - after the color add a space, this will then bbe written to the screen exactly as you see it note that each line in the file does not give a new line in the program
   - after the declarator any text written will be outputted exactly as written, with a few exceptions
     - all unicode characters between U+E000 and U+EFFF are reserved.
-    - the discriminator will not be treated like a new line, instead it allows for use of tags withs are described in the table bellow. 
     - all spaces before or after tags will be removed, to place a space around them use two spaces<br>
-  - | tags                        | actions |
+
+    - the discriminator will not be treated like a new line, instead it allows for use of tags which are described in the table bellow. 
+  - | tags                        |`actions`|
     |-----------------------------|---------|
-    | new line                    | `&&`      |
-    | current player number       | `&player` |
-    | value of the first die      | `&die1`   |
-    | value of the second die     | `&die2`   |
-    | sum of dice                 | `&sum`    |
-    | current player's total gold | `&gold`   |
-    | player 1's total gold       | `&gold1`  |
-    | player 2's total gold       | `&gold2`  |
-    | turn number                 | `&turn`   |
-    | current tile text           | `&tileT`  |
-    | current tile nr             | `&tileNR` |
-    | change text color red       | `&red`    |
-    | change text color green     | `&green`  |
-    | change text color blue      | `&blue`   |
-    | change text color cyan      | `&cyan`   |
-    | change text color yellow    | `&yellow` |
-    | change text color purple    | `&purple` |
-    | use default color           | `&reset`  |
+    | new line                    |`&&     `|
+    | current player number       |`&player`|
+    | value of the first die      |`&die1  `|
+    | value of the second die     |`&die2  `|
+    | sum of dice                 |`&sum   `|
+    | current player's total gold |`&gold  `|
+    | player 1's total gold       |`&gold1 `|
+    | player 2's total gold       |`&gold2 `|
+    | turn number                 |`&turn  `|
+    | current tile text           |`&tileT `|
+    | current tile nr             |`&tileNR`|
+    | change text color red       |`&red   `|
+    | change text color green     |`&green `|
+    | change text color blue      |`&blue  `|
+    | change text color cyan      |`&cyan  `|
+    | change text color yellow    |`&yellow`|
+    | change text color purple    |`&purple`|
+    | use default color           |`&reset `|
+  - lastly `&input&` may exist exactly once, this tag shows where the user will write their input, it will automatically add a new line after it, no new line tag should be written on the same line as the input tag.
 - `error messages`
   - these are not strictly necessary and are only meant for debugging and should not (unless something goes wrong) be printed, they are only meant to allow further development using your translated error messages
   - each line must start with the start descriptor
