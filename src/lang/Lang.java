@@ -15,6 +15,7 @@ public class Lang {
   private static HashMap<String,String> errors;
   private static int inputStart = 0;
   private static int inputHeight = 0;
+  private static int totalHeight = 0;
   public static void loadLang(LanguageCode lang){
     String path = "./Lang/" + lang.name() + ".lang";
     Scanner languageReader;
@@ -127,6 +128,7 @@ public class Lang {
     int lineIndex = input.indexOf(descriptor + descriptor);
     while(lineIndex != -1){
       inputHeight++;
+      totalHeight++;
       lineIndex = input.indexOf(descriptor + descriptor, lineIndex + 1);
     }
     input = input.replace(descriptor + descriptor + " ", "\n");
@@ -160,6 +162,18 @@ public class Lang {
   public static void moveToInput(){
     System.out.print("\r\033[" + inputHeight + "A");
     System.out.print("\033[" + inputStart + "C");
+  }
+  public static void moveToStartFromInput(){
+    System.out.print("\r\033[" + (totalHeight - inputHeight) + "A");
+  }
+  public static void moveToStart(){
+    System.out.print("\r\033[" + totalHeight + "A");
+  }
+  public static void moveToEndFromInput(){
+    System.out.print("\n".repeat(inputHeight));
+  }
+  public static void moveToEnd(){
+    System.out.print("\n".repeat(totalHeight));
   }
 
 
