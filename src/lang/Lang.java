@@ -64,9 +64,9 @@ public class Lang {
           Integer.parseInt(
             currentLine.split(" ")[0]
             .replace(descriptorTile, "")
-          )-1
+          )-2
         ] = 
-        currentLine
+        currentLine = currentLine
         .replaceFirst
         (currentLine.split(" ")[0] + " ", "")
         .replace(descriptorTile, "" + TileValue);
@@ -107,22 +107,22 @@ public class Lang {
       System.out.println("lang: " + lang.name());
       System.out.println("expected path: " + path);
     }
+    System.out.println("done loading " + lang.name());
   }
   public static String[][] tags = {
     //human written key
-    new String[]{"player","die1"  ,"die2"  ,"sum"   ,"gold"  ,"gold1" ,"gold2" ,"turn"  ,"tileT" ,"tileNR","red"   ,"green" ,"blue"  ,"cyan"  ,"yellow","purple","r"     ,"g"     ,"b"     ,"c"     ,"y"     ,"p"     ,"reset"     ,"default"},
+    new String[]{"player","die1"  ,"die2"  ,"sum"   ,"gold"  ,"gold1" ,"gold2" ,"turn"  ,"tileT" ,"tileNR","red"   ,"green" ,"blue"  ,"cyan"  ,"yellow","purple","r"     ,"g"     ,"b"     ,"c"     ,"y"     ,"p"     ,"reset"     ,"default"   , ""},
     //computer writen key
-    new String[]{"\uE001","\uE002","\uE003","\uE004","\uE005","\uE006","\uE007","\uE008","\uE009","\uE00A",Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.reset(),Ansi.reset()}
+    new String[]{"\uE001","\uE002","\uE003","\uE004","\uE005","\uE006","\uE007","\uE008","\uE009","\uE00A",Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.reset(),Ansi.reset(), Ansi.reset()}
   };
   
   private static String setTags (String input, String descriptor){
-    input.replace(" " + descriptor, descriptor);
-    input.replace(descriptor + descriptor, "\n");
+    input = input.replace(descriptor + descriptor + " ", "\n");
+    input = input.replace(descriptor + descriptor, "\n");
     for (int i = 0; i < tags[0].length; i++) {
-      input.replace(descriptor + tags[0][i] + " ", tags[1][i]);
-      input.replace(descriptor + tags[0][i], tags[1][i]);
+      input = input.replace(descriptor + tags[0][i] + " ", tags[1][i]);
+      input = input.replace(descriptor + tags[0][i], tags[1][i]);
     }
-    input.replace(descriptor, Ansi.reset());
     return input;
   }
   public static void error(Exception e){
@@ -139,7 +139,9 @@ public class Lang {
       }
     }
   }
-
+  public static String getUI(LanguageCode lang){
+    return UserInterface[lang.ordinal()];
+  }
 
 
 
