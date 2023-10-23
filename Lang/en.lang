@@ -16,3 +16,6 @@
 & this is the first line of the UI
 && player number = &red &player
 && &y should be yellow &
+&& Player &player  rolled &die1  and &die2 .
+&  the sum is: &sum
+
