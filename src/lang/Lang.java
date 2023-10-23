@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import app.ValueReader;
+
 import java.util.HashMap;
 
 import lang.Language.LanguageCode;
 
 public class Lang {
-  private static final int TileValue = 0;
   private static String[][] tiles = new String[LanguageCode.values().length][];
   private static String[] UserInterface = new String[LanguageCode.values().length];
   private static HashMap<String,String> errors;
@@ -58,18 +60,19 @@ public class Lang {
         if(!currentLine.split(" ")[0].contains(descriptorTile)){
           break;
         }
+        int tileNumber = Integer.parseInt(
+            currentLine.split(" ")[0]
+            .replace(descriptorTile, "")
+          );
         tiles[
           lang.ordinal()
         ][
-          Integer.parseInt(
-            currentLine.split(" ")[0]
-            .replace(descriptorTile, "")
-          )-2
+          tileNumber-2
         ] = 
         currentLine = currentLine
         .replaceFirst
         (currentLine.split(" ")[0] + " ", "")
-        .replace(descriptorTile, "" + TileValue);
+        .replace(descriptorTile, "" + ValueReader.getTileValue(tileNumber));
         currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\uE000";
       }
       UserInterface[lang.ordinal()] = "";
@@ -109,10 +112,10 @@ public class Lang {
     }
     System.out.println("done loading " + lang.name());
   }
-  public static String[][] tags = {
+  public static String[][] tags = {//IMPORTANT Do not change this without communicationg with the groupand changing Main.java PrintUI()!!!!!!! 
     //human written key
     new String[]{"player","die1"  ,"die2"  ,"sum"   ,"gold"  ,"gold1" ,"gold2" ,"turn"  ,"tileT" ,"tileNR","red"   ,"green" ,"blue"  ,"cyan"  ,"yellow","purple","r"     ,"g"     ,"b"     ,"c"     ,"y"     ,"p"     ,"reset"     ,"default"   , ""},
-    //computer writen key
+    //computer written key
     new String[]{"\uE001","\uE002","\uE003","\uE004","\uE005","\uE006","\uE007","\uE008","\uE009","\uE00A",Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.reset(),Ansi.reset(), Ansi.reset()}
   };
   
@@ -142,7 +145,9 @@ public class Lang {
   public static String getUI(LanguageCode lang){
     return UserInterface[lang.ordinal()];
   }
-
+  public static String getTileText(LanguageCode lang, int tileNumber){
+    return tiles[lang.ordinal()][tileNumber-2];
+  }
 
 
 
