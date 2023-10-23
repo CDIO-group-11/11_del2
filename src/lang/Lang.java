@@ -4,15 +4,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import app.ValueReader;
+
 import java.util.HashMap;
 
 import lang.Language.LanguageCode;
 
 public class Lang {
-  private static final int TileValue = 0;
   private static String[][] tiles = new String[LanguageCode.values().length][];
   private static String[] UserInterface = new String[LanguageCode.values().length];
   private static HashMap<String,String> errors;
+  private static int inputStart = 0;
+  private static int inputHeight = 0;
+  private static int totalHeight = 0;
   public static void loadLang(LanguageCode lang){
     String path = "./Lang/" + lang.name() + ".lang";
     Scanner languageReader;
@@ -58,25 +63,31 @@ public class Lang {
         if(!currentLine.split(" ")[0].contains(descriptorTile)){
           break;
         }
+        int tileNumber = Integer.parseInt(
+            currentLine.split(" ")[0]
+            .replace(descriptorTile, "")
+          );
         tiles[
           lang.ordinal()
         ][
-          Integer.parseInt(
-            currentLine.split(" ")[0]
-            .replace(descriptorTile, "")
-          )-2
+          tileNumber-2
         ] = 
         currentLine = currentLine
         .replaceFirst
         (currentLine.split(" ")[0] + " ", "")
-        .replace(descriptorTile, "" + TileValue);
+        .replace(descriptorTile, "" + ValueReader.getTileValue(tileNumber));
         currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\uE000";
       }
       UserInterface[lang.ordinal()] = "";
-      while(!currentLine.equals("\uE000")){//read inteface
+      while(!currentLine.equals("\uE000")){//read interface
         if(currentLine.equals("")) {
           currentLine = languageReader.hasNextLine() ? languageReader.nextLine() : "\uE000";
           continue;
+        }
+        if(currentLine.contains(descriptorInterface + "input" + descriptorInterface)){
+          inputStart = currentLine.indexOf(descriptorInterface + "input" + descriptorInterface) + (descriptorInterface + "input" + descriptorInterface).length();
+          currentLine = currentLine.replace(descriptorInterface + "input" + descriptorInterface, descriptorInterface + descriptorInterface);
+          inputHeight = 1;
         }
         if(!currentLine.split(" ")[0].contains(descriptorInterface)){
           break;
@@ -109,14 +120,20 @@ public class Lang {
     }
     System.out.println("done loading " + lang.name());
   }
-  public static String[][] tags = {
+  public static String[][] tags = {//IMPORTANT Do not change this without communicationg with the groupand changing Main.java PrintUI()!!!!!!! 
     //human written key
     new String[]{"player","die1"  ,"die2"  ,"sum"   ,"gold"  ,"gold1" ,"gold2" ,"turn"  ,"tileT" ,"tileNR","red"   ,"green" ,"blue"  ,"cyan"  ,"yellow","purple","r"     ,"g"     ,"b"     ,"c"     ,"y"     ,"p"     ,"reset"     ,"default"   , ""},
-    //computer writen key
+    //computer written key
     new String[]{"\uE001","\uE002","\uE003","\uE004","\uE005","\uE006","\uE007","\uE008","\uE009","\uE00A",Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.reset(),Ansi.reset(), Ansi.reset()}
   };
   
   private static String setTags (String input, String descriptor){
+    int lineIndex = input.indexOf(descriptor + descriptor);
+    while(lineIndex != -1){
+      inputHeight++;
+      totalHeight++;
+      lineIndex = input.indexOf(descriptor + descriptor, lineIndex + 1);
+    }
     input = input.replace(descriptor + descriptor + " ", "\n");
     input = input.replace(descriptor + descriptor, "\n");
     for (int i = 0; i < tags[0].length; i++) {
@@ -142,8 +159,25 @@ public class Lang {
   public static String getUI(LanguageCode lang){
     return UserInterface[lang.ordinal()];
   }
-
-
+  public static String getTileText(LanguageCode lang, int tileNumber){
+    return tiles[lang.ordinal()][tileNumber-2];
+  }
+  public static void moveToInput(){
+    System.out.print("\r\033[" + inputHeight + "A");
+    System.out.print("\033[" + inputStart + "C");
+  }
+  public static void moveToStartFromInput(){
+    System.out.print("\r\033[" + (totalHeight - inputHeight) + "A");
+  }
+  public static void moveToStart(){
+    System.out.print("\r\033[" + totalHeight + "A");
+  }
+  public static void moveToEndFromInput(){
+    System.out.print("\n".repeat(inputHeight));
+  }
+  public static void moveToEnd(){
+    System.out.print("\n".repeat(totalHeight));
+  }
 
 
 
