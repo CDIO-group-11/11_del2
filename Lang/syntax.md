@@ -36,24 +36,24 @@ this is the same location as this file is found.
     - all spaces before or after tags will be removed, to place a space around them use two spaces<br>
   - | tags                        | actions |
     |-----------------------------|---------|
-    | new line                    | &&      |
-    | current player number       | &player |<#TODO all actions should be in `this`>
-    | value of the first die      | &die1   |
-    | value of the second die     | &die2   |
-    | sum of dice                 | &sum    |
-    | current player's total gold | &gold   |
-    | player 1's total gold       | &gold1  |
-    | player 2's total gold       | &gold2  |
-    | turn number                 | &turn   |
-    | current tile text           | &tileT  |
-    | current tile nr             | &tileNR |
-    | change text color red       | &red    |
-    | change text color green     | &green  |
-    | change text color blue      | &blue   |
-    | change text color cyan      | &cyan   |
-    | change text color yellow    | &yellow |
-    | change text color purple    | &purple |
-    | use default color           | &reset  |
+    | new line                    | `&&`      |
+    | current player number       | `&player` |
+    | value of the first die      | `&die1`   |
+    | value of the second die     | `&die2`   |
+    | sum of dice                 | `&sum`    |
+    | current player's total gold | `&gold`   |
+    | player 1's total gold       | `&gold1`  |
+    | player 2's total gold       | `&gold2`  |
+    | turn number                 | `&turn`   |
+    | current tile text           | `&tileT`  |
+    | current tile nr             | `&tileNR` |
+    | change text color red       | `&red`    |
+    | change text color green     | `&green`  |
+    | change text color blue      | `&blue`   |
+    | change text color cyan      | `&cyan`   |
+    | change text color yellow    | `&yellow` |
+    | change text color purple    | `&purple` |
+    | use default color           | `&reset`  |
 - `error messages`
   - these are not strictly necessary and are only meant for debugging and should not (unless something goes wrong) be printed, they are only meant to allow further development using your translated error messages
   - each line must start with the start descriptor
