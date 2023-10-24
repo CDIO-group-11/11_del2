@@ -21,6 +21,8 @@ public class Test {
     Main.setData(new Board(6, currentLang),currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
     responses.add(isFair(runCount));
     responses.add(isFast(runCount));
+    responses.add(negativePoints(runCount));
+    responses.add(werewall(runCount));
   }
 
   private static Response isFair(int runCount) {
@@ -66,5 +68,27 @@ public class Test {
     }
   }
 
+  private static Response negativePoints(int runCount){
+    Player player = new Player(0, 1000);
+    for (int i = -runCount/2-1000; i < runCount/2-1000; i++) {
+      player.addGold(i);
+      if(player.getGold() < 0){
+        return new Fail("negativePoints");
+      }
+      player = new Player(0, 1000);
+    }
+    return new Pass("negativePoints");
+  }
 
+  private static Response werewall(int runCount){
+    Main.setData(new Test_Board(6,currentLang,10), currentLang, null);
+    int play = Main.getCurrentPlayer();
+    for (int i = 0; i < runCount; i++) {
+      Main.turn();
+      if(Main.getCurrentPlayer() != play){
+        return new Fail("werewall");
+      }
+    }
+    return new Pass("werewall");
+  }
 }

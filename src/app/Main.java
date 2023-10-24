@@ -103,4 +103,8 @@ public class Main {
     Main.currentLanguage = lang;
     Main.players = players;
   }
+
+  public static int getCurrentPlayer(){
+    return currentPlayer;
+  }
 }

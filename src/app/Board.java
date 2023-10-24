@@ -4,7 +4,7 @@ import lang.Lang;
 import lang.Language.LanguageCode;
 
 public class Board {
-  private Tile[] tiles;
+  protected Tile[] tiles;
   private RaffleCup cup;
   public Board(int numberOfSides, LanguageCode lang){
     tiles = new Tile[numberOfSides*2-1];
