@@ -13,6 +13,12 @@
 @11 this is tile 10, located at 11, value = @
 @12 this is tile 11, located at 12, value = @
 
-& Player&player  choose action: '&roll ' to roll dice, '&save ' to save game or '&exit ' to exit game.
+& Player&player  choose action:
+&& '&roll ' to roll dice 
+&& '&save ' to save game
+&& '&exit ' to exit game.
+&&
 &input&
-&& Player&other  rolled: &die1  and &die2  = &sum
+& Player&other  rolled:
+&& &die1  and &die2  and landed on tile &tileNR
+&& &tileT
