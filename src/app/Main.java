@@ -59,10 +59,14 @@ public class Main {
         System.out.println("player " + currentPlayer + " wins!");
         break;
       }
-      currentPlayer++;
-      currentPlayer %= players.length;
-      turnNumber++;
+      if(currentTile.extraTurn){
+        currentPlayer++;
+        currentPlayer %= players.length;
+        turnNumber++;
+      }
     }
+    System.out.print("\rsaving game\nwhat should the save file be called:                  \033[17D");
+    Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
   }
 
   private static void PrintUI(Tile currentTile) {
