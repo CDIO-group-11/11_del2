@@ -39,6 +39,7 @@ this is the same location as this file is found.
     |-----------------------------|---------|
     | new line                    |`&&     `|
     | current player number       |`&player`|
+    | previous player number      |`&other `|
     | value of the first die      |`&die1  `|
     | value of the second die     |`&die2  `|
     | sum of dice                 |`&sum   `|
