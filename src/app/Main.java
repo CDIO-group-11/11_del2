@@ -20,7 +20,7 @@ public class Main {
   private static Player[] players = new Player[2];
   private static Scanner userInput = new Scanner(System.in);
   
-  public static void main(String[] args) {
+  private static void main(String[] args) {
     currentLanguage = Language.getLanguage(userInput);
     ValueReader.loadValues();
     Lang.loadLang(currentLanguage);
@@ -51,21 +51,31 @@ public class Main {
             break;
         }
       }
-      Tile currentTile = table.makeMove();
-      Lang.moveToStartFromInput();
-      PrintUI(currentTile);
-      Lang.moveToInput();
-      if(players[currentPlayer].addGold(currentTile.value)){
-        System.out.println("player " + currentPlayer + " wins!");
+      if(turn()){
         break;
       }
-      currentPlayer++;
-      currentPlayer %= players.length;
-      turnNumber++;
     }
   }
+/**
+ * 
+ * @return whether someone won
+ */
+  public static boolean turn() {
+    Tile currentTile = table.makeMove();
+    Lang.moveToStartFromInput();
+    PrintUI(currentTile);
+    Lang.moveToInput();
+    if(players[currentPlayer].addGold(currentTile.value)){
+      System.out.println("player " + currentPlayer + " wins!");
+      return true;
+    }
+    currentPlayer++;
+    currentPlayer %= players.length;
+    turnNumber++;
+    return false;
+  }
 
-  private static void PrintUI(Tile currentTile) {
+  public static void PrintUI(Tile currentTile) {
     String UI  = Lang.getUI(currentLanguage);
     UI = UI.replace("\uE001", "" + (currentPlayer + 1));
     UI = UI.replace("\uE002", "" + table.getCup().getSides()[0]);
