@@ -51,7 +51,7 @@ public class Main {
     UI = UI.replace("\uE001", "" + (currentPlayer + 1));
     UI = UI.replace("\uE002", "" + table.getCup().getSides()[0]);
     UI = UI.replace("\uE003", "" + table.getCup().getSides()[1]);
-    UI = UI.replace("\uE004", "" + (table.getCup().getSides()[0] + table.getCup().getSides()[1]));
+    UI = UI.replace("\uE004", "" + (table.getCup().getSides()[0] + table.getCup().getSides()[1]) + "  ");
     UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
     UI = UI.replace("\uE006", "" + players[0].getGold());
     UI = UI.replace("\uE007", "" + players[1].getGold());
