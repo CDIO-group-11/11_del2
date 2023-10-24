@@ -42,10 +42,14 @@ public class Main {
             readingInput = false;
             break;
           case EXIT_COMMAND:
+            Lang.moveToEnd();
+            System.out.println();
             readingInput = false;
             System.exit(0);
             break;
           case SAVE_COMMAND:
+            Lang.moveToEnd();
+            System.out.println();
             readingInput = false;
             System.out.print("\rwhat should the save file be called:                  \033[17D");
             Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);

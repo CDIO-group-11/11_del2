@@ -171,7 +171,7 @@ public class Lang {
     System.out.print("\033[" + inputStart + "C");
   }
   public static void moveToStartFromInput(){
-    System.out.print("\r\033[" + (totalHeight - inputHeight) + "A");
+    System.out.print("\r\033[" + (totalHeight - inputHeight + 1) + "A");
   }
   public static void moveToStart(){
     System.out.print("\r\033[" + totalHeight + "A");
