@@ -4,15 +4,24 @@ import lang.Lang;
 import lang.Language;
 import lang.Language.LanguageCode;
 
+import java.io.File;
+import java.util.Scanner;
+
+import data.Save;
+
 public class Main {
+  private final static String ROLL_COMMAND = "r"; 
+  private final static String EXIT_COMMAND = "x";
+  private final static String SAVE_COMMAND = "s";
   private static Board table;
   private static LanguageCode currentLanguage;
   private static int currentPlayer = 0;
   private static long turnNumber = 0;
   private static Player[] players = new Player[2];
+  private static Scanner userInput = new Scanner(System.in);
   
   public static void main(String[] args) {
-    currentLanguage = Language.getLanguage();
+    currentLanguage = Language.getLanguage(userInput);
     ValueReader.loadValues();
     Lang.loadLang(currentLanguage);
     table = new Board(6, currentLanguage);
@@ -20,8 +29,32 @@ public class Main {
       players[i] = new Player(i, 1000);
     }
     while (true) {
+      boolean readingInput = true;
+      while (readingInput) {
+        String in = userInput.nextLine();
+        Lang.redoInput();
+        System.out.print(" ".repeat(in.length()));
+        System.out.print("\033["+ in.length() + "D");
+        switch (in) {
+          case ROLL_COMMAND:
+            readingInput = false;
+            break;
+          case EXIT_COMMAND:
+            readingInput = false;
+            System.exit(0);
+            break;
+          case SAVE_COMMAND:
+            readingInput = false;
+            System.out.print("\rwhat should the save file be called:                  \033[17D");
+            Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
+            System.exit(0);
+            break;
+        }
+      }
       Tile currentTile = table.makeMove();
+      Lang.moveToStartFromInput();
       PrintUI(currentTile);
+      Lang.moveToInput();
       if(players[currentPlayer].addGold(currentTile.value)){
         System.out.println("player " + currentPlayer + " wins!");
         break;
@@ -37,7 +70,7 @@ public class Main {
     UI = UI.replace("\uE001", "" + (currentPlayer + 1));
     UI = UI.replace("\uE002", "" + table.getCup().getSides()[0]);
     UI = UI.replace("\uE003", "" + table.getCup().getSides()[1]);
-    UI = UI.replace("\uE004", "" + (table.getCup().getSides()[0] + table.getCup().getSides()[1]));
+    UI = UI.replace("\uE004", "" + (table.getCup().getSides()[0] + table.getCup().getSides()[1]) + "  ");
     UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
     UI = UI.replace("\uE006", "" + players[0].getGold());
     UI = UI.replace("\uE007", "" + players[1].getGold());
