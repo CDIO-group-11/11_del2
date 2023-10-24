@@ -19,7 +19,7 @@ public class Main {
   private static long turnNumber = 0;
   private static Player[] players = new Player[2];
   private static Scanner userInput = new Scanner(System.in);
-  
+  private static int previousPlayer;
   public static void main(String[] args) {
     currentLanguage = Language.getLanguage(userInput);
     ValueReader.loadValues();
@@ -57,6 +57,7 @@ public class Main {
       Lang.moveToStartFromInput();
       PrintUI(currentTile);
       Lang.moveToInput();
+      previousPlayer = currentPlayer;
       if(players[currentPlayer].addGold(currentTile.value)){
         System.out.println("player " + currentPlayer + " wins!");
         break;
@@ -83,6 +84,7 @@ public class Main {
       UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
       UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
       UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
+      UI = UI.replace("\uE00E", "" + previousPlayer);
     }else{
       UI = UI.replace("\uE001", "" + (currentPlayer + 1));
       UI = UI.replace("\uE002", "" + table.getCup().getSides()[0]);
@@ -97,6 +99,7 @@ public class Main {
       UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
       UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
       UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
+      UI = UI.replace("\uE00E", "" + previousPlayer);
     }
     System.out.println(UI);
   }
