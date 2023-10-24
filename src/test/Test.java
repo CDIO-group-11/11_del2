@@ -21,6 +21,7 @@ public class Test {
     Main.setData(new Board(6, currentLang),currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
     responses.add(isFair(runCount));
     responses.add(isFast(runCount));
+    responses.add(negativePoints(runCount));
   }
 
   private static Response isFair(int runCount) {
@@ -66,5 +67,14 @@ public class Test {
     }
   }
 
-
+  private static Response negativePoints(int runCount){
+    Player player = new Player(0, 1000);
+    for (int i = -runCount/2-1000; i < runCount/2-1000; i++) {
+      player.addGold(i);
+      if(player.getGold() < 0){
+        return new Fail("negativePoints");
+      }
+    }
+    return new Pass("negativePoints");
+  }
 }
