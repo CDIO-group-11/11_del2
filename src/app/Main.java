@@ -28,6 +28,7 @@ public class Main {
     for (int i = 0; i < players.length; i++) {
       players[i] = new Player(i, 1000);
     }
+    PrintUI(null);
     while (true) {
       boolean readingInput = true;
       while (readingInput) {
@@ -77,6 +78,9 @@ public class Main {
     UI = UI.replace("\uE008", "" + turnNumber);
     UI = UI.replace("\uE009", "" + currentTile.text);
     UI = UI.replace("\uE00A", "" + currentTile.number);
+    UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
+    UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
+    UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
     System.out.println(UI);
   }
 }
