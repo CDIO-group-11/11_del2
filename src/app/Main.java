@@ -46,7 +46,7 @@ public class Main {
           case SAVE_COMMAND:
             readingInput = false;
             System.out.print("\rwhat should the save file be called:                  \033[17D");
-            Save.state(players, new File("data/" + userInput.nextLine() + "state"));
+            Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
             System.exit(0);
             break;
         }
