@@ -122,9 +122,9 @@ public class Lang {
   }
   public static String[][] tags = {//IMPORTANT Do not change this without communicationg with the groupand changing Main.java PrintUI()!!!!!!! 
     //human written key
-    new String[]{"player","die1"  ,"die2"  ,"sum"   ,"gold"  ,"gold1" ,"gold2" ,"turn"  ,"tileT" ,"tileNR","red"   ,"green" ,"blue"  ,"cyan"  ,"yellow","purple","r"     ,"g"     ,"b"     ,"c"     ,"y"     ,"p"     ,"reset"     ,"default"   , ""},
+    new String[]{"player","die1"  ,"die2"  ,"sum"   ,"gold"  ,"gold1" ,"gold2" ,"turn"  ,"tileT" ,"tileNR","red"   ,"green" ,"blue"  ,"cyan"  ,"yellow","purple","r"     ,"g"     ,"b"     ,"c"     ,"y"     ,"p"     ,"reset"     ,"default"   , ""          ,"roll"  ,"save"  ,"exit"},
     //computer written key
-    new String[]{"\uE001","\uE002","\uE003","\uE004","\uE005","\uE006","\uE007","\uE008","\uE009","\uE00A",Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.reset(),Ansi.reset(), Ansi.reset()}
+    new String[]{"\uE001","\uE002","\uE003","\uE004","\uE005","\uE006","\uE007","\uE008","\uE009","\uE00A",Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.r(),Ansi.g(),Ansi.b(),Ansi.c(),Ansi.y(),Ansi.p(),Ansi.reset(),Ansi.reset(), Ansi.reset(),"\uE00B","\uE00C","\uE00D"}
   };
   
   private static String setTags (String input, String descriptor){

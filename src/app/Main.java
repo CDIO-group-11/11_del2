@@ -28,6 +28,8 @@ public class Main {
     for (int i = 0; i < players.length; i++) {
       players[i] = new Player(i, 1000);
     }
+    PrintUI(null);
+    Lang.moveToInput();
     while (true) {
       boolean readingInput = true;
       while (readingInput) {
@@ -67,16 +69,35 @@ public class Main {
 
   private static void PrintUI(Tile currentTile) {
     String UI  = Lang.getUI(currentLanguage);
-    UI = UI.replace("\uE001", "" + (currentPlayer + 1));
-    UI = UI.replace("\uE002", "" + table.getCup().getSides()[0]);
-    UI = UI.replace("\uE003", "" + table.getCup().getSides()[1]);
-    UI = UI.replace("\uE004", "" + (table.getCup().getSides()[0] + table.getCup().getSides()[1]) + "  ");
-    UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
-    UI = UI.replace("\uE006", "" + players[0].getGold());
-    UI = UI.replace("\uE007", "" + players[1].getGold());
-    UI = UI.replace("\uE008", "" + turnNumber);
-    UI = UI.replace("\uE009", "" + currentTile.text);
-    UI = UI.replace("\uE00A", "" + currentTile.number);
+    if(currentTile == null){
+      UI = UI.replace("\uE001", "" + (currentPlayer + 1));
+      UI = UI.replace("\uE002", " ");
+      UI = UI.replace("\uE003", " ");
+      UI = UI.replace("\uE004", " ");
+      UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
+      UI = UI.replace("\uE006", "" + players[0].getGold());
+      UI = UI.replace("\uE007", "" + players[1].getGold());
+      UI = UI.replace("\uE008", "" + turnNumber);
+      UI = UI.replace("\uE009", " ");
+      UI = UI.replace("\uE00A", " ");
+      UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
+      UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
+      UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
+    }else{
+      UI = UI.replace("\uE001", "" + (currentPlayer + 1));
+      UI = UI.replace("\uE002", "" + table.getCup().getSides()[0]);
+      UI = UI.replace("\uE003", "" + table.getCup().getSides()[1]);
+      UI = UI.replace("\uE004", "" + (table.getCup().getSides()[0] + table.getCup().getSides()[1]) + "  ");
+      UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
+      UI = UI.replace("\uE006", "" + players[0].getGold());
+      UI = UI.replace("\uE007", "" + players[1].getGold());
+      UI = UI.replace("\uE008", "" + turnNumber);
+      UI = UI.replace("\uE009", "" + currentTile.text);
+      UI = UI.replace("\uE00A", "" + currentTile.number);
+      UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
+      UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
+      UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
+    }
     System.out.println(UI);
   }
 }
