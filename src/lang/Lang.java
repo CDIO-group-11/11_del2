@@ -166,6 +166,10 @@ public class Lang {
     System.out.print("\r\033[" + inputHeight + "A");
     System.out.print("\033[" + inputStart + "C");
   }
+  public static void redoInput(){
+    System.out.print("\r\033[1A");
+    System.out.print("\033[" + inputStart + "C");
+  }
   public static void moveToStartFromInput(){
     System.out.print("\r\033[" + (totalHeight - inputHeight) + "A");
   }
