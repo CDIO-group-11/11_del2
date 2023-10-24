@@ -1,17 +1,21 @@
 package test;
 
 public class Pass implements Response {
-  public Pass(String test){}
+  private String test;
+  public Pass(String test, String data){
+    this.test = test;
+  }
+    public Pass(String test){
+    this.test = test;
+  }
 
   @Override
   public void print() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'print'");
+    System.out.println(test + "\t\t\u001b[32mPASSED\u001b[0m");
   }
 
   @Override
   public boolean didPass() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'didPass'");
+    return true;
   }
 }
