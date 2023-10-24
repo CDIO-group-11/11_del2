@@ -20,7 +20,7 @@ public class Main {
   private static Player[] players = new Player[2];
   private static Scanner userInput = new Scanner(System.in);
   
-  private static void main(String[] args) {
+  public static void main(String[] args) {
     currentLanguage = Language.getLanguage(userInput);
     ValueReader.loadValues();
     Lang.loadLang(currentLanguage);
@@ -79,7 +79,7 @@ public class Main {
     return false;
   }
 
-  public static void PrintUI(Tile currentTile) {
+  private static void PrintUI(Tile currentTile) {
     String UI  = Lang.getUI(currentLanguage);
     UI = UI.replace("\uE001", "" + (currentPlayer + 1));
     UI = UI.replace("\uE002", "" + table.getCup().getSides()[0]);
@@ -92,5 +92,15 @@ public class Main {
     UI = UI.replace("\uE009", "" + currentTile.text);
     UI = UI.replace("\uE00A", "" + currentTile.number);
     System.out.println(UI);
+  }
+
+  /**
+   * only for testing
+   * @param table
+   */
+  public static void setData(Board table, LanguageCode lang, Player[] players){
+    Main.table = table;
+    Main.currentLanguage = lang;
+    Main.players = players;
   }
 }

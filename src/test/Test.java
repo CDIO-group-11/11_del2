@@ -4,15 +4,21 @@ import java.util.ArrayList;
 
 import app.Board;
 import app.Main;
+import app.Player;
 import app.RaffleCup;
+import app.ValueReader;
 import lang.Lang;
 import lang.Language.LanguageCode;
 
 public class Test {
   private static RaffleCup cup = new RaffleCup(2, 6);
   private static ArrayList<Response> responses = new ArrayList<Response>();
+  private static LanguageCode currentLang = LanguageCode.en;
   public static void main(String[] args) {
     int runCount = 1000;
+    ValueReader.loadValues();
+    Lang.loadLang(currentLang);
+    Main.setData(new Board(6, currentLang),currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
     responses.add(isFair(runCount));
     responses.add(isFast(runCount));
   }
@@ -44,9 +50,10 @@ public class Test {
 
   private static Response isFast(int runCount) {
     long start = System.currentTimeMillis();
-    Lang.loadLang(LanguageCode.en);
     for (int i = 0; i < runCount; i++) {
-      Main.turn();
+      if(Main.turn()){
+        Main.setData(new Board(6, currentLang),currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
+      }
     }
     System.out.println("\n".repeat(3));
     System.out.print("\033[H\033[2J");
@@ -58,4 +65,6 @@ public class Test {
       return new Fail("isFast","dice speed\n\ttime taken: " + (end-start) + "ms\n\tallowed: " + (333.333f*runCount) + "ms");
     }
   }
+
+
 }
