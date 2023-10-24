@@ -21,4 +21,26 @@ public class Player {
   public int getID() {
     return ID;
   }
+  /**
+   * supports ID: 0,1,2,3
+   * @return the hash of this player
+   */
+  public long toHash() {
+    long hash = 0;
+    hash |= ID;// or=
+    hash |= gold<<2; // or= bitshift
+    return ~hash; //not
+  }
+  /**
+   * supports ID: 0,1,2,3
+   * @param hash the hashes of players
+   * @return an array of players from the hash
+   */
+  public static Player[] fromHash(Long[] hash){
+    Player[] players = new Player[hash.length];
+    for (int i = 0; i < players.length; i++) {
+      players[i] = new Player((int) ((~hash[i]) & 0b11), (int) ((~hash[i]) >> 2));
+    }
+    return players;
+  }
 }
