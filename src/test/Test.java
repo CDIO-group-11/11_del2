@@ -74,6 +74,7 @@ public class Test {
       if(player.getGold() < 0){
         return new Fail("negativePoints");
       }
+      player = new Player(0, 1000);
     }
     return new Pass("negativePoints");
   }
