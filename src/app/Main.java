@@ -3,10 +3,16 @@ package app;
 import lang.Lang;
 import lang.Language;
 import lang.Language.LanguageCode;
+
+import java.io.File;
 import java.util.Scanner;
+
+import data.Save;
 
 public class Main {
   private final static String ROLL_COMMAND = "r"; 
+  private final static String EXIT_COMMAND = "x";
+  private final static String SAVE_COMMAND = "s";
   private static Board table;
   private static LanguageCode currentLanguage;
   private static int currentPlayer = 0;
@@ -23,13 +29,26 @@ public class Main {
       players[i] = new Player(i, 1000);
     }
     while (true) {
-      while (true) {
+      boolean readingInput = true;
+      while (readingInput) {
         String in = userInput.nextLine();
         Lang.redoInput();
         System.out.print(" ".repeat(in.length()));
         System.out.print("\033["+ in.length() + "D");
-        if(in.equals(ROLL_COMMAND)){
-          break;
+        switch (in) {
+          case ROLL_COMMAND:
+            readingInput = false;
+            break;
+          case EXIT_COMMAND:
+            readingInput = false;
+            System.exit(0);
+            break;
+          case SAVE_COMMAND:
+            readingInput = false;
+            System.out.print("\rwhat should the save file be called:                  \033[17D");
+            Save.state(players, new File("data/" + userInput.nextLine() + "state"));
+            System.exit(0);
+            break;
         }
       }
       Tile currentTile = table.makeMove();
