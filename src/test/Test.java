@@ -64,11 +64,11 @@ public class Test {
     deviation = Math.sqrt(deviation / (double)(runCount * 2));
     double fairMean = (double)(1 + 2 + 3 + 4 + 5 + 6) / 6d;
     double fairDeviation = Math.sqrt(
-      Math.pow(1 - mean, 2) * (1d / 6d)+
-      Math.pow(2 - mean, 2) * (1d / 6d)+
-      Math.pow(3 - mean, 2) * (1d / 6d)+
-      Math.pow(4 - mean, 2) * (1d / 6d)+
-      Math.pow(5 - mean, 2) * (1d / 6d)+
+      Math.pow(1 - mean, 2) * (1d / 6d) +
+      Math.pow(2 - mean, 2) * (1d / 6d) +
+      Math.pow(3 - mean, 2) * (1d / 6d) +
+      Math.pow(4 - mean, 2) * (1d / 6d) +
+      Math.pow(5 - mean, 2) * (1d / 6d) +
       Math.pow(6 - mean, 2) * (1d / 6d)
     );
     String strMean = ("" + mean).length() <= 5 ? ("" + mean) : ("" + mean).substring(0,5);
