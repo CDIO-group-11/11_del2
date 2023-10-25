@@ -57,6 +57,9 @@ public class Main {
             break;
         }
       }
+      if(turn(true)){
+        break;
+      }
     }
     System.out.print("\rsaving game\nwhat should the save file be called:                  \033[17D");
     Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
