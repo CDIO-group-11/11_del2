@@ -66,23 +66,20 @@ public class Test {
       Math.pow(5 - mean, 2) * (1d / 6d)+
       Math.pow(6 - mean, 2) * (1d / 6d)
     );
+    String name = "isFair";
+    String data = 
+      "dice fairness\n\t" + 
+      "mean: " + ("" + mean).substring(0, 3) + " max/min allowed:" + ("" + ((fairMean) * 1.1d)).substring(0,3) + "/" + ("" + ((fairMean) / 1.1d)).substring(0,3) + "\n\t" + 
+      "deviation: " + ("" + deviation).substring(0, 3) + " max/min allowed:" + ("" + ((fairMean) * 1.1d)).substring(0,3) + "/" + ("" + ((fairMean) / 1.1d)).substring(0,3);
     if(
       deviation < (fairDeviation * 1.1d) &&
       deviation > (fairDeviation / 1.1d) && 
       mean < (fairMean) * 1.1d && 
       mean > (fairMean) / 1.1d
       ){
-      return new Pass(
-        "isFair","dice fairness\n\t" + 
-        "mean: " + ("" + mean).substring(0, 5) + " " +"\n\t" + 
-        "deviation: " + ("" + deviation).substring(0, 5)
-      );
+      return new Pass(name,data);
     }else{
-      return new Fail(
-        "isFair","dice fairness\n\t" + 
-        "mean: " + ("" + mean).substring(0, 5) + " " +"\n\t" + 
-        "deviation: " + ("" + deviation).substring(0, 5)
-      );
+      return new Fail(name,data);
     }
   }
 
@@ -97,10 +94,12 @@ public class Test {
     System.out.print("\033[H\033[2J");
     System.out.flush();
     long end = System.currentTimeMillis();
+    String name = "isFast";
+    String data = "dice speed\n\ttime taken: " + ((float)(end-start)/runCount) + "ms\n\tallowed: " + (333.333f) + "ms";
     if(end-start < 333.333f*runCount){
-      return new Pass("isFast","dice speed\n\ttime taken: " + ((float)(end-start)/runCount) + "ms\n\tallowed: " + (333.333f) + "ms");
+      return new Pass(name,data);
     }else{
-      return new Fail("isFast","dice speed\n\ttime taken: " + ((float)(end-start)/runCount) + "ms\n\tallowed: " + (333.333f) + "ms");
+      return new Fail(name,data);
     }
   }
 
