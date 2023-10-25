@@ -25,6 +25,7 @@ public class Test {
     responses.add(isFast(runCount));
     responses.add(negativeGold(runCount));
     responses.add(werewall(runCount));
+    responses.add(correctGold());
     
     System.out.println("\n".repeat(15));
     System.out.print("\033[H\033[2J");
@@ -154,5 +155,14 @@ public class Test {
       player = Main.getCurrentPlayer();
     }
     return new Pass("werewall");
+  }
+
+  private static Response correctGold(){
+    Main.init(currentLang);
+    Player[] players = Main.getplayers();
+    if(players[0].getGold() == 1000 && players[1].getGold() == 1000){
+      return new Fail("correctGold");
+    }
+    return new Pass("correctGold");
   }
 }
