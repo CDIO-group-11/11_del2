@@ -51,7 +51,7 @@ public class Main {
             break;
         }
       }
-      if(turn()){
+      if(turn(true)){
         break;
       }
     }
@@ -62,9 +62,10 @@ public class Main {
  * 
  * @return whether someone won
  */
-  public static boolean turn() {
+  public static boolean turn(boolean print) {
     Tile currentTile = table.makeMove();
     Lang.moveToStartFromInput();
+    if(print)
     PrintUI(currentTile);
     Lang.moveToInput();
     if(players[currentPlayer].addGold(currentTile.value)){

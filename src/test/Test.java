@@ -21,8 +21,22 @@ public class Test {
     Main.setData(new Board(6, currentLang),currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
     responses.add(isFair(runCount));
     responses.add(isFast(runCount));
-    responses.add(negativePoints(runCount));
+    responses.add(negativeGold(runCount));
     responses.add(werewall(runCount));
+    
+    int passes = 0;
+    for (int i = 0; i < responses.size(); i++) {
+      responses.get(i).print();
+      passes += responses.get(i).didPass() ? 1 : 0;
+    }
+    System.out.println(
+      "passed "  + passes + " out of " + responses.size() + " tests\n" + 
+      "this is equivalent to a " + ((float) (passes * 100) / (float) responses.size() + "% pass rate")
+    );
+    System.out.println("\n\ndetails:");
+    for (int i = 0; i < responses.size(); i++) {
+      responses.get(i).printData();
+    }
   }
 
   private static Response isFair(int runCount) {
@@ -53,7 +67,7 @@ public class Test {
   private static Response isFast(int runCount) {
     long start = System.currentTimeMillis();
     for (int i = 0; i < runCount; i++) {
-      if(Main.turn()){
+      if(Main.turn(true)){
         Main.setData(new Board(6, currentLang),currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
       }
     }
@@ -62,29 +76,29 @@ public class Test {
     System.out.flush();
     long end = System.currentTimeMillis();
     if(end-start < 333.333f*runCount){
-      return new Pass("isFast","dice speed\n\ttime taken: " + (end-start) + "ms\n\tallowed: " + (333.333f*runCount) + "ms");
+      return new Pass("isFast","dice speed\n\ttime taken: " + ((float)(end-start)/runCount) + "ms\n\tallowed: " + (333.333f) + "ms");
     }else{
-      return new Fail("isFast","dice speed\n\ttime taken: " + (end-start) + "ms\n\tallowed: " + (333.333f*runCount) + "ms");
+      return new Fail("isFast","dice speed\n\ttime taken: " + ((float)(end-start)/runCount) + "ms\n\tallowed: " + (333.333f) + "ms");
     }
   }
 
-  private static Response negativePoints(int runCount){
+  private static Response negativeGold(int runCount){
     Player player = new Player(0, 1000);
     for (int i = -runCount/2-1000; i < runCount/2-1000; i++) {
       player.addGold(i);
       if(player.getGold() < 0){
-        return new Fail("negativePoints");
+        return new Fail("minusGold");
       }
       player = new Player(0, 1000);
     }
-    return new Pass("negativePoints");
+    return new Pass("minusGold");
   }
 
   private static Response werewall(int runCount){
-    Main.setData(new Test_Board(6,currentLang,10), currentLang, null);
+    Main.setData(new Test_Board(6,currentLang,10), currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
     int play = Main.getCurrentPlayer();
     for (int i = 0; i < runCount; i++) {
-      Main.turn();
+      Main.turn(false);
       if(Main.getCurrentPlayer() != play){
         return new Fail("werewall");
       }
