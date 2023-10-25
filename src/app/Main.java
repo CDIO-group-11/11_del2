@@ -19,7 +19,7 @@ public class Main {
   private static long turnNumber = 0;
   private static Player[] players = new Player[2];
   private static Scanner userInput = new Scanner(System.in);
-  
+  private static int previousPlayer;
   public static void main(String[] args) {
     currentLanguage = Language.getLanguage(userInput);
     ValueReader.loadValues();
@@ -28,6 +28,8 @@ public class Main {
     for (int i = 0; i < players.length; i++) {
       players[i] = new Player(i, 1000);
     }
+    PrintUI(null);
+    Lang.moveToInput();
     while (true) {
       boolean readingInput = true;
       while (readingInput) {
@@ -40,10 +42,14 @@ public class Main {
             readingInput = false;
             break;
           case EXIT_COMMAND:
+            Lang.moveToEnd();
+            System.out.println();
             readingInput = false;
             System.exit(0);
             break;
           case SAVE_COMMAND:
+            Lang.moveToEnd();
+            System.out.println();
             readingInput = false;
             System.out.print("\rwhat should the save file be called:                  \033[17D");
             Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
@@ -68,11 +74,12 @@ public class Main {
     if(print)
     PrintUI(currentTile);
     Lang.moveToInput();
+    previousPlayer = currentPlayer;
     if(players[currentPlayer].addGold(currentTile.value)){
       System.out.println("player " + currentPlayer + " wins!");
       return true;
     }
-      if(currentTile.extraTurn){
+      if(!currentTile.extraTurn){
         currentPlayer++;
         currentPlayer %= players.length;
       }
@@ -82,16 +89,37 @@ public class Main {
 
   private static void PrintUI(Tile currentTile) {
     String UI  = Lang.getUI(currentLanguage);
-    UI = UI.replace("\uE001", "" + (currentPlayer + 1));
-    UI = UI.replace("\uE002", "" + table.getCup().getSides()[0]);
-    UI = UI.replace("\uE003", "" + table.getCup().getSides()[1]);
-    UI = UI.replace("\uE004", "" + (table.getCup().getSides()[0] + table.getCup().getSides()[1]) + "  ");
-    UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
-    UI = UI.replace("\uE006", "" + players[0].getGold());
-    UI = UI.replace("\uE007", "" + players[1].getGold());
-    UI = UI.replace("\uE008", "" + turnNumber);
-    UI = UI.replace("\uE009", "" + currentTile.text);
-    UI = UI.replace("\uE00A", "" + currentTile.number);
+    if(currentTile == null){
+      UI = UI.replace("\uE001", "" + (currentPlayer + 1));
+      UI = UI.replace("\uE002", " ");
+      UI = UI.replace("\uE003", " ");
+      UI = UI.replace("\uE004", " ");
+      UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
+      UI = UI.replace("\uE006", "" + players[0].getGold());
+      UI = UI.replace("\uE007", "" + players[1].getGold());
+      UI = UI.replace("\uE008", "" + turnNumber);
+      UI = UI.replace("\uE009", " ");
+      UI = UI.replace("\uE00A", " ");
+      UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
+      UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
+      UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
+      UI = UI.replace("\uE00E", "" + previousPlayer);
+    }else{
+      UI = UI.replace("\uE001", "" + (currentPlayer + 1));
+      UI = UI.replace("\uE002", "" + table.getCup().getSides()[0]);
+      UI = UI.replace("\uE003", "" + table.getCup().getSides()[1]);
+      UI = UI.replace("\uE004", "" + (table.getCup().getSides()[0] + table.getCup().getSides()[1]) + "  ");
+      UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
+      UI = UI.replace("\uE006", "" + players[0].getGold());
+      UI = UI.replace("\uE007", "" + players[1].getGold());
+      UI = UI.replace("\uE008", "" + turnNumber);
+      UI = UI.replace("\uE009", "" + currentTile.text + "  ");
+      UI = UI.replace("\uE00A", "" + currentTile.number + "  ");
+      UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
+      UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
+      UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
+      UI = UI.replace("\uE00E", "" + previousPlayer);
+    }
     System.out.println(UI);
   }
 

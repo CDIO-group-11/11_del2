@@ -35,26 +35,39 @@ this is the same location as this file is found.
     - all spaces before or after tags will be removed, to place a space around them use two spaces<br>
 
     - the discriminator will not be treated like a new line, instead it allows for use of tags which are described in the table bellow. 
-  - | tags                        |`actions`|
-    |-----------------------------|---------|
-    | new line                    |`&&     `|
-    | current player number       |`&player`|
-    | value of the first die      |`&die1  `|
-    | value of the second die     |`&die2  `|
-    | sum of dice                 |`&sum   `|
-    | current player's total gold |`&gold  `|
-    | player 1's total gold       |`&gold1 `|
-    | player 2's total gold       |`&gold2 `|
-    | turn number                 |`&turn  `|
-    | current tile text           |`&tileT `|
-    | current tile nr             |`&tileNR`|
-    | change text color red       |`&red   `|
-    | change text color green     |`&green `|
-    | change text color blue      |`&blue  `|
-    | change text color cyan      |`&cyan  `|
-    | change text color yellow    |`&yellow`|
-    | change text color purple    |`&purple`|
-    | use default color           |`&reset `|
+  - | **tags**                    |*`actions`*|*internal name*|
+    |-----------------------------|-----------|---------------|
+    | new line                    |`&&       `|*\n*           |
+    | current player number       |`&player  `|*\uE001*       |
+    | previous player number      |`&other   `|*\uE00E*       |
+    | value of the first die      |`&die1    `|*\uE002*       |
+    | value of the second die     |`&die2    `|*\uE003*       |
+    | sum of dice                 |`&sum     `|*\uE004*       |
+    | current player's total gold |`&gold    `|*\uE005*       |
+    | player 1's total gold       |`&gold1   `|*\uE006*       |
+    | player 2's total gold       |`&gold2   `|*\uE007*       |
+    | turn number                 |`&turn    `|*\uE008*       |
+    | current tile text           |`&tileT   `|*\uE009*       |
+    | current tile nr             |`&tileNR  `|*\uE00A*       |
+    | change text color red       |`&red     `|*Ansi.r()*     |
+    | change text color red       |`&r       `|*Ansi.r()*     |
+    | change text color green     |`&green   `|*Ansi.g()*     |
+    | change text color green     |`&g       `|*Ansi.g()*     |
+    | change text color blue      |`&blue    `|*Ansi.b()*     |
+    | change text color blue      |`&b       `|*Ansi.b()*     |
+    | change text color cyan      |`&cyan    `|*Ansi.c()*     |
+    | change text color cyan      |`&c       `|*Ansi.c()*     |
+    | change text color yellow    |`&yellow  `|*Ansi.y()*     |
+    | change text color yellow    |`&y       `|*Ansi.y()*     |
+    | change text color purple    |`&purple  `|*Ansi.p()*     |
+    | change text color purple    |`&p       `|*Ansi.p()*     |
+    | use default color           |`&reset   `|*Ansi.reset()* |
+    | use default color           |`&default `|*Ansi.reset()* |
+    | use default color           |`&        `|*Ansi.reset()* |
+    | roll command                |`&roll    `|*\uE00B*       |
+    | save command                |`&save    `|*\uE00C*       |
+    | exit command                |`&exit    `|*\uE00D*       |
+    | writing point               |`&input   `|*\n*           |
   - lastly `&input&` may exist exactly once, this tag shows where the user will write their input, it will automatically add a new line after it, no new line tag should be written on the same line as the input tag.
 - `error messages`
   - these are not strictly necessary and are only meant for debugging and should not (unless something goes wrong) be printed, they are only meant to allow further development using your translated error messages
