@@ -24,6 +24,9 @@ public class Test {
     responses.add(negativeGold(runCount));
     responses.add(werewall(runCount));
     
+    System.out.println("\n".repeat(15));
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
     int passes = 0;
     for (int i = 0; i < responses.size(); i++) {
       responses.get(i).print();
@@ -66,41 +69,48 @@ public class Test {
       Math.pow(5 - mean, 2) * (1d / 6d)+
       Math.pow(6 - mean, 2) * (1d / 6d)
     );
+    String strMean = ("" + mean).length() <= 5 ? ("" + mean) : ("" + mean).substring(0,5);
+    String strDeviation = ("" + deviation).length() <= 5 ? ("" + deviation) : ("" + deviation).substring(0,5);;
+    
+    String strFairMeanMax = ("" + (fairMean * 1.1d)).length() <= 5 ? ("" + (fairMean * 1.1d)) : ("" + (fairMean * 1.1d)).substring(0,5);;
+    String strFairMeanMin = ("" + (fairMean / 1.1d)).length() <= 5 ? ("" + (fairMean / 1.1d)) : ("" + (fairMean / 1.1d)).substring(0,5);;
+    String strFairDeviationMax = ("" + (fairDeviation * 1.1d)).length() <= 5 ? ("" + (fairDeviation * 1.1d)) : ("" + (fairDeviation * 1.1d)).substring(0,5);;
+    String strFairDeviationMin = ("" + (fairDeviation / 1.1d)).length() <= 5 ? ("" + (fairDeviation / 1.1d)) : ("" + (fairDeviation / 1.1d)).substring(0,5);;
+    String name = "isFair";
+    String data = 
+      "dice fairness\n\t" + 
+      "mean: " + strMean + " allowed max/min: " + strFairMeanMax + "/" + strFairMeanMin + "\n\t" + 
+      "deviation: " + strDeviation + " allowed max/min: " + strFairDeviationMax + "/" + strFairDeviationMin;
     if(
       deviation < (fairDeviation * 1.1d) &&
       deviation > (fairDeviation / 1.1d) && 
       mean < (fairMean) * 1.1d && 
       mean > (fairMean) / 1.1d
       ){
-      return new Pass(
-        "isFair","dice fairness\n\t" + 
-        "mean: " + ("" + mean).substring(0, 5) + " " +"\n\t" + 
-        "deviation: " + ("" + deviation).substring(0, 5)
-      );
+      return new Pass(name,data);
     }else{
-      return new Fail(
-        "isFair","dice fairness\n\t" + 
-        "mean: " + ("" + mean).substring(0, 5) + " " +"\n\t" + 
-        "deviation: " + ("" + deviation).substring(0, 5)
-      );
+      return new Fail(name,data);
     }
   }
 
   private static Response isFast(int runCount) {
+    int i = 0;
+    long end = 0;
     long start = System.currentTimeMillis();
-    for (int i = 0; i < runCount; i++) {
-      if(Main.turn(true)){
+    while (i < runCount) {
+      if(Main.turn(false)){
         Main.setData(new Board(6, currentLang),currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
       }
+      i++;
     }
-    System.out.println("\n".repeat(3));
-    System.out.print("\033[H\033[2J");
+    end = System.currentTimeMillis();
     System.out.flush();
-    long end = System.currentTimeMillis();
+    String name = "isFast";
+    String data = "dice speed\n\ttime taken: " + ((float)(end-start)/(float)(runCount)) + "ms\n\tallowed: " + (333.333f) + "ms";
     if(end-start < 333.333f*runCount){
-      return new Pass("isFast","dice speed\n\ttime taken: " + ((float)(end-start)/runCount) + "ms\n\tallowed: " + (333.333f) + "ms");
+      return new Pass(name,data);
     }else{
-      return new Fail("isFast","dice speed\n\ttime taken: " + ((float)(end-start)/runCount) + "ms\n\tallowed: " + (333.333f) + "ms");
+      return new Fail(name,data);
     }
   }
 
