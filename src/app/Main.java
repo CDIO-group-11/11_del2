@@ -23,6 +23,7 @@ public class Main {
   public static void main(String[] args) {
     currentLanguage = Language.getLanguage(userInput);
     ValueReader.loadValues();
+    ValueReader_for_ekstra_turn.loadValues();
     Lang.loadLang(currentLanguage);
     table = new Board(6, currentLanguage);
     for (int i = 0; i < players.length; i++) {
