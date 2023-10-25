@@ -13,15 +13,12 @@
 @11 this is tile 10, located at 11, value = @
 @12 this is tile 11, located at 12, value = @
 
-& this is the first line of the UI
-&& input: 
+& Player&player  choose action:
+&& '&roll ' to roll dice 
+&& '&save ' to save game
+&& '&exit ' to exit game.
+&&
 &input&
-& player number = &red &player
-&& &y should be yellow &
-&& Player &player  rolled &die1  and &die2 .
-&  the sum is: &sum
-&& h
-&& h
-&& h
-&& h
-
+& Player&other  rolled:
+&& &die1  and &die2  and landed on tile &tileNR
+&& &tileT
