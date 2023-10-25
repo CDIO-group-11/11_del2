@@ -49,18 +49,40 @@ public class Test {
     }
     double mean = 0;
     for (int i = 0; i < sides.length; i++) {
-      mean += sides[i];
+      mean += sides[i] * (i+1);
     }
-    mean /= (double)sides.length;
+    mean /= (double)(runCount*2);
     double deviation = 0;
     for (int i = 0; i < sides.length; i++) {
-      deviation += Math.pow(sides[i]-mean,2);
+      deviation += Math.pow((i+1)-mean,2)*sides[i];
     }
-    deviation = Math.sqrt(deviation*1d/(double)sides.length);
-    if(deviation < (mean/10f) && mean < ((runCount/3f)*1.1f) && mean > ((runCount/3f)*0.9f)){
-      return new Pass("isFair","dice fairness\n\tmean: " + mean +"\n\tdeviation: " + deviation);
+    deviation = Math.sqrt(deviation / (double)(runCount * 2));
+    double fairMean = (double)(1 + 2 + 3 + 4 + 5 + 6) / 6d;
+    double fairDeviation = Math.sqrt(
+      Math.pow(1 - mean, 2) * (1d / 6d)+
+      Math.pow(2 - mean, 2) * (1d / 6d)+
+      Math.pow(3 - mean, 2) * (1d / 6d)+
+      Math.pow(4 - mean, 2) * (1d / 6d)+
+      Math.pow(5 - mean, 2) * (1d / 6d)+
+      Math.pow(6 - mean, 2) * (1d / 6d)
+    );
+    if(
+      deviation < (fairDeviation * 1.1d) &&
+      deviation > (fairDeviation / 1.1d) && 
+      mean < (fairMean) * 1.1d && 
+      mean > (fairMean) / 1.1d
+      ){
+      return new Pass(
+        "isFair","dice fairness\n\t" + 
+        "mean: " + ("" + mean).substring(0, 5) + " " +"\n\t" + 
+        "deviation: " + ("" + deviation).substring(0, 5)
+      );
     }else{
-      return new Fail("isFair","dice fairness\n\tmean: " + mean +"\n\tdeviation: " + deviation);
+      return new Fail(
+        "isFair","dice fairness\n\t" + 
+        "mean: " + ("" + mean).substring(0, 5) + " " +"\n\t" + 
+        "deviation: " + ("" + deviation).substring(0, 5)
+      );
     }
   }
 
