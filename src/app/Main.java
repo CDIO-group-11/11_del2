@@ -57,19 +57,31 @@ public class Main {
             break;
         }
       }
-      Tile currentTile = table.makeMove();
-      Lang.moveToStartFromInput();
-      PrintUI(currentTile);
-      Lang.moveToInput();
-      previousPlayer = currentPlayer;
-      if(players[currentPlayer].addGold(currentTile.value)){
-        System.out.println("player " + currentPlayer + " wins!");
-        break;
-      }
-      currentPlayer++;
-      currentPlayer %= players.length;
-      turnNumber++;
     }
+    System.out.print("\rsaving game\nwhat should the save file be called:                  \033[17D");
+    Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
+  }
+/**
+ * 
+ * @return whether someone won
+ */
+  public static boolean turn(boolean print) {
+    Tile currentTile = table.makeMove();
+    Lang.moveToStartFromInput();
+    if(print)
+    PrintUI(currentTile);
+    Lang.moveToInput();
+    previousPlayer = currentPlayer;
+    if(players[currentPlayer].addGold(currentTile.value)){
+      System.out.println("player " + currentPlayer + " wins!");
+      return true;
+    }
+      if(currentTile.extraTurn){
+        currentPlayer++;
+        currentPlayer %= players.length;
+      }
+      turnNumber++;
+    return false;
   }
 
   private static void PrintUI(Tile currentTile) {
@@ -106,5 +118,19 @@ public class Main {
       UI = UI.replace("\uE00E", "" + previousPlayer);
     }
     System.out.println(UI);
+  }
+
+  /**
+   * only for testing
+   * @param table
+   */
+  public static void setData(Board table, LanguageCode lang, Player[] players){
+    Main.table = table;
+    Main.currentLanguage = lang;
+    Main.players = players;
+  }
+
+  public static int getCurrentPlayer(){
+    return currentPlayer;
   }
 }

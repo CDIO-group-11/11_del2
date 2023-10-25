@@ -25,4 +25,7 @@ public class ValueReader{
     public static int getTileValue(int TileNumber){
         return nums.get(TileNumber - 1);
     }
+    public static boolean hasExtraTurn(int i) {
+        return false;
+    }
 }
