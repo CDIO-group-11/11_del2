@@ -79,7 +79,7 @@ public class Main {
       System.out.println("player " + currentPlayer + " wins!");
       return true;
     }
-      if(currentTile.extraTurn){
+      if(!currentTile.extraTurn){
         currentPlayer++;
         currentPlayer %= players.length;
       }
@@ -113,8 +113,8 @@ public class Main {
       UI = UI.replace("\uE006", "" + players[0].getGold());
       UI = UI.replace("\uE007", "" + players[1].getGold());
       UI = UI.replace("\uE008", "" + turnNumber);
-      UI = UI.replace("\uE009", "" + currentTile.text);
-      UI = UI.replace("\uE00A", "" + currentTile.number);
+      UI = UI.replace("\uE009", "" + currentTile.text + "  ");
+      UI = UI.replace("\uE00A", "" + currentTile.number + "  ");
       UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
       UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
       UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
