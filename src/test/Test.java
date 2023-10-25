@@ -7,6 +7,7 @@ import app.Main;
 import app.Player;
 import app.RaffleCup;
 import app.ValueReader;
+import app.ValueReader_for_ekstra_turn;
 import lang.Lang;
 import lang.Language.LanguageCode;
 
@@ -17,6 +18,7 @@ public class Test {
   public static void main(String[] args) {
     int runCount = 1000;
     ValueReader.loadValues();
+    ValueReader_for_ekstra_turn.loadValues();
     Lang.loadLang(currentLang);
     Main.setData(new Board(6, currentLang),currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
     responses.add(isFair(runCount));
@@ -128,12 +130,28 @@ public class Test {
 
   private static Response werewall(int runCount){
     Main.setData(new Test_Board(6,currentLang,10), currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
-    int play = Main.getCurrentPlayer();
+    int player = Main.getCurrentPlayer();
     for (int i = 0; i < runCount; i++) {
       Main.turn(false);
-      if(Main.getCurrentPlayer() != play){
+      if(Main.getCurrentPlayer() != player){
         return new Fail("werewall");
       }
+    }
+    Main.setData(new Test_Board(6,currentLang,9), currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
+    for (int i = 0; i < runCount/2; i++) {
+      Main.turn(false);
+      if(Main.getCurrentPlayer() == player){
+        return new Fail("werewall");
+      }
+      player = Main.getCurrentPlayer();
+    }
+    Main.setData(new Test_Board(6,currentLang,11), currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
+    for (int i = 0; i < runCount/2; i++) {
+      Main.turn(false);
+      if(Main.getCurrentPlayer() == player){
+        return new Fail("werewall");
+      }
+      player = Main.getCurrentPlayer();
     }
     return new Pass("werewall");
   }
