@@ -10,7 +10,7 @@ public class Board {
     tiles = new Tile[numberOfSides*2-1];
     cup = new RaffleCup(2, numberOfSides);
     for (int i = 0; i < tiles.length; i++) {
-      tiles[i] = new Tile(ValueReader.getTileValue(i+1),Lang.getTileText(lang, i+2),i+2,ValueReader.hasExtraTurn(i+1));
+      tiles[i] = new Tile(ValueReader.getTileValue(i+1),Lang.getTileText(lang, i+2),i+2,ValueReader_for_ekstra_turn.hasExtraTurn(i+1));
     }
   }
   public Tile makeMove(){
