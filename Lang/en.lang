@@ -13,12 +13,17 @@
 @11 this is tile 10, located at 11, value = @
 @12 this is tile 11, located at 12, value = @
 
+& Current turn: &turn 
+&&
 & Player&player  choose action:
-&& '&roll ' to roll dice 
-&& '&save ' to save game
-&& '&exit ' to exit game.
+&& &green '&roll '&  to roll dice 
+&& &cyan '&save '&  to save game
+&& &red '&exit '&  to exit game.
 &&
 &input&
 & Player&other  rolled:
-&& &die1  and &die2  and landed on tile &tileNR
-&& &tileT
+&& &green &die1 &  and &green &die2 &  and landed on tile &green &tileNR & 
+&& &tileT 
+&&
+&&Player 1  gold: &yellow &gold1 &reset
+&&Player 2  gold: &yellow &gold2 &reset
