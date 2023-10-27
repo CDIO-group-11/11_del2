@@ -81,19 +81,19 @@ public class Main {
   public static boolean turn(boolean print) {
     Tile currentTile = table.makeMove();
     Lang.moveToStartFromInput();
-    if(print)
-    PrintUI(currentTile);
-    Lang.moveToInput();
     previousPlayer = currentPlayer;
     if(players[currentPlayer].addGold(currentTile.value)){
       System.out.println("player " + currentPlayer + " wins!");
       return true;
     }
-      if(!currentTile.extraTurn){
-        currentPlayer++;
-        currentPlayer %= players.length;
-      }
-      turnNumber++;
+    if(!currentTile.extraTurn){
+      currentPlayer++;
+      currentPlayer %= players.length;
+    }
+    turnNumber++;
+    if(print)
+    PrintUI(currentTile);
+    Lang.moveToInput();
     return false;
   }
 
@@ -105,8 +105,8 @@ public class Main {
       UI = UI.replace("\uE003", " ");
       UI = UI.replace("\uE004", " ");
       UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
-      UI = UI.replace("\uE006", "" + players[0].getGold());
-      UI = UI.replace("\uE007", "" + players[1].getGold());
+      UI = UI.replace("\uE006", "" + players[0].getGold() + "   ");
+      UI = UI.replace("\uE007", "" + players[1].getGold() + "   ");
       UI = UI.replace("\uE008", "" + turnNumber);
       UI = UI.replace("\uE009", " ");
       UI = UI.replace("\uE00A", " ");
@@ -120,8 +120,8 @@ public class Main {
       UI = UI.replace("\uE003", "" + table.getCup().getSides()[1]);
       UI = UI.replace("\uE004", "" + (table.getCup().getSides()[0] + table.getCup().getSides()[1]) + "  ");
       UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
-      UI = UI.replace("\uE006", "" + players[0].getGold());
-      UI = UI.replace("\uE007", "" + players[1].getGold());
+      UI = UI.replace("\uE006", "" + players[0].getGold() + "   ");
+      UI = UI.replace("\uE007", "" + players[1].getGold() + "   ");
       UI = UI.replace("\uE008", "" + turnNumber);
       UI = UI.replace("\uE009", "" + currentTile.text + "  ");
       UI = UI.replace("\uE00A", "" + currentTile.number + "  ");

@@ -10,8 +10,8 @@ public class Player {
     this.gold = startingGold;
     this.ID = ID;
   }
-  public boolean addGold(int gold){
-    this.gold += gold;
+  public boolean addGold(int Gold){
+    this.gold += Gold;
     if(this.gold < 0){
       this.gold = 0;
     }

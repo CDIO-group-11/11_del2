@@ -18,8 +18,8 @@ public class Save {
       out += i + 1 < players.length ? "\n" : "";
     }
     try {
-      FileWriter stateWriter = new FileWriter(file);
       file.createNewFile();
+      FileWriter stateWriter = new FileWriter(file);
       stateWriter.write(out);;
       stateWriter.close();
     } catch (IOException e) {
