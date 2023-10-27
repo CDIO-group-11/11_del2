@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import lang.Lang;
+
 public class ValueReader{
     private static ArrayList<Integer> nums = new ArrayList<Integer>();
 
@@ -17,9 +19,9 @@ public class ValueReader{
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Lang.error(e);
         } catch (NumberFormatException e){
-            e.printStackTrace();
+            Lang.error(e);
         }
     }
     public static int getTileValue(int TileNumber){

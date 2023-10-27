@@ -34,7 +34,7 @@ public class Main {
       while (readingInput) {
         String in = userInput.nextLine();
         Lang.redoInput();
-        System.out.print(" ".repeat(in.length()));
+        System.out.print(" ".repeat(in.length() == 0 ? 1 : in.length()));
         System.out.print("\033["+ in.length() + "D");
         switch (in) {
           case ROLL_COMMAND:
@@ -51,7 +51,7 @@ public class Main {
             System.out.println();
             readingInput = false;
             System.out.print("\rwhat should the save file be called:" + (clean ? "" : "                  \033[17D"));
-            Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
+            Save.state(players, userInput, currentLanguage);
             System.exit(0);
             break;
         }
@@ -61,7 +61,7 @@ public class Main {
       }
     }
     System.out.print("\rsaving game\nwhat should the save file be called:" + (clean ? "" : "                  \033[17D"));
-    Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
+    Save.state(players, userInput, currentLanguage);
   }
 
   public static void init(LanguageCode lang) {
