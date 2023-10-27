@@ -1,28 +1,28 @@
 @ 11 &
 []
 
-@2 this is tile 1, located at 2, value = @
-@3 this is tile 2, located at 3, value = @
-@4 this is tile 3, located at 4, value = @
-@5 this is tile 4, located at 5, value = @
-@6 this is tile 5, located at 6, value = @
-@7 this is tile 6, located at 7, value = @
-@8 this is tile 7, located at 8, value = @
-@9 this is tile 8, located at 9, value = @
-@10 this is tile 9, located at 10, value = @
-@11 this is tile 10, located at 11, value = @
-@12 this is tile 11, located at 12, value = @
+@2 Du har fundet @ guld paa toppen af et taarn.                                     
+@3 Du faldt ned i et krater og mistede @ guld.                                      
+@4 Du gik gennem paladsets porte og modtog paa magisk vis @ guld.                   
+@5 Du ankom i en kold oerken og maatte betale @ guld for varmt toej.                
+@6 Du kender borgmesteren i den indmurede by, han byder dig velkommen med @ guld.   
+@7 Du kommer til et kloster, men du er en synder og bliver derfor smidt ud igen.    
+@8 Du gaar ind i en moerk grotte, et maerkeligt dyr stjaeler @ guld fra dig.        
+@9 Du hjaelper folket i de smaa hytter i bjergene og de takker dig med @ guld.      
+@10 Du ofre @ guld til varevaeggen og bliver til en varulv, du har nu et ekstra liv.
+@11 Du kigger ned i et dybt hul og taber din hat til @ guld ned i hullet. Uheldigt  
+@12 Du finder en guldmine fyldt med guld og tager saa meget, du kan holde @.        
 
-& Nuværende runde: &turn 
+& Nuvaerende runde: &turn 
 &&
-& Spiller&player  vælg handling:
+& Spiller  &player  tag handling:
 && &green '&roll '&  for at rulle terning. 
 && &cyan '&save '&  for at gemme spillet.
 && &red '&exit '&  for at lukke spillet.
 &&
 &input&
 & Spiller&other  rullede:
-&& &green &die1 &  og &green &die2 &  og landede på felt: &green &tileNR & 
+&& &green &die1 &  og &green &die2 &  og landede paa felt: &green &tileNR & 
 && &tileT 
 &&
 &&Spiller 1  guld: &yellow &gold1 &reset
