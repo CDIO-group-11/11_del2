@@ -15,7 +15,7 @@
 
 & Nuvaerende runde: &turn 
 &&
-& Spiller&player  tag handling:
+& Spiller  &player  tag handling:
 && &green '&roll '&  for at rulle terning. 
 && &cyan '&save '&  for at gemme spillet.
 && &red '&exit '&  for at lukke spillet.
