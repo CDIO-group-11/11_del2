@@ -111,7 +111,7 @@ public class Main {
       UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
       UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
       UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
-      UI = UI.replace("\uE00E", "" + previousPlayer + 1);
+      UI = UI.replace("\uE00E", "" + (previousPlayer + 1));
     }else{
       UI = UI.replace("\uE001", "" + (currentPlayer + 1));
       UI = UI.replace("\uE002", "" + table.getCup().getSides()[0]);
@@ -126,7 +126,7 @@ public class Main {
       UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
       UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
       UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
-      UI = UI.replace("\uE00E", "" + previousPlayer + 1);
+      UI = UI.replace("\uE00E", "" + (previousPlayer + 1));
     }
     System.out.println(UI);
   }
