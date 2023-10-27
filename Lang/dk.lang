@@ -1,28 +1,28 @@
 @ 11 &
 []
 
-@2 Du har fundet @ guld på toppen af et tårn. 
+@2 Du har fundet @ guld paa toppen af et taarn. 
 @3 Du faldt ned i et krater og mistede @ guld.
-@4 Du gik gennem paladsets porte og modtog på magisk vis @ guld.
-@5 Du ankom i en kold ørken og måtte betale @ guld for varmt tøj. 
+@4 Du gik gennem paladsets porte og modtog paa magisk vis @ guld.
+@5 Du ankom i en kold oerken og maatte betale @ guld for varmt toej. 
 @6 Du kender borgmesteren i den indmurede by, han byder dig velkommen med @ guld. 
 @7 Du kommer til et kloster, men du er en synder og bliver derfor smidt ud igen.
-@8 Du går ind i en mørk grotte, et mærkeligt dyr stjæler @ guld fra dig. 
-@9 Du hjælper folket i de små hytter i bjergene og de takker dig med @ guld.
-@10 Du ofre @ guld til varevæggen og bliver til en varulv, du har nu et ekstra liv. 
+@8 Du gaar ind i en moerk grotte, et maerkeligt dyr stjaeler @ guld fra dig. 
+@9 Du hjaelper folket i de smaa hytter i bjergene og de takker dig med @ guld.
+@10 Du ofre @ guld til varevaeggen og bliver til en varulv, du har nu et ekstra liv. 
 @11 Du kigger ned i et dybt hul og taber din hat til @ guld ned i hullet. Uheldigt
-@12 Du finder en guldmine fyldt med guld og tager så meget, du kan holde +@.
+@12 Du finder en guldmine fyldt med guld og tager saa meget, du kan holde +@.
 
-& Nuværende runde: &turn 
+& Nuvaerende runde: &turn 
 &&
-& Spiller&player  vælg handling:
+& Spiller&player  tag handling:
 && &green '&roll '&  for at rulle terning. 
 && &cyan '&save '&  for at gemme spillet.
 && &red '&exit '&  for at lukke spillet.
 &&
 &input&
 & Spiller&other  rullede:
-&& &green &die1 &  og &green &die2 &  og landede på felt: &green &tileNR & 
+&& &green &die1 &  og &green &die2 &  og landede paa felt: &green &tileNR & 
 && &tileT 
 &&
 &&Spiller 1  guld: &yellow &gold1 &reset
