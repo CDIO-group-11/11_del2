@@ -1,17 +1,17 @@
 @ 11 &
 []
 
-@2 You found @ gold at the top of a tower.
-@3 You fell into a crater and lost @ gold.
-@4 You walked through the palace gates and magically received @ gold.
-@5 You arrived in a cold desert and had to pay @ gold for warm clothes.
-@6 You know the mayor of the walled city, he welcomes you with @ gold.
-@7 You come to a monastery but you are a sinner and are therefore thrown out again.
-@8 You enter a dark cave, a strange animal steals @ gold from you. 
-@9 You help the people in small cabins in the mountains and they thank you with @ gold.
+@2 You found @ gold at the top of a tower.                                                          
+@3 You fell into a crater and lost @ gold.                                                    
+@4 You walked through the palace gates and magically received @ gold.                         
+@5 You arrived in a cold desert and had to pay @ gold for warm clothes.                       
+@6 You know the mayor of the walled city, he welcomes you with @ gold.                        
+@7 You come to a monastery but you are a sinner and are therefore thrown out again.           
+@8 You enter a dark cave, a strange animal steals @ gold from you.                            
+@9 You help the people in small cabins in the mountains and they thank you with @ gold.       
 @10 You sacrifice @ gold to the warewall and turn into a werewolf, you now have an extra life.
-@11 You look down into a deep hole and drop your @ gold hat into the hole.
-@12 You find a gold mine filled with gold and take as much as you can hold +@.
+@11 You look down into a deep hole and drop your @ gold hat into the hole.                    
+@12 You find a gold mine filled with gold and take as much as you can hold +@.                
 
 & Current turn: &turn 
 &&
@@ -21,9 +21,8 @@
 && &red '&exit '&  to exit game.
 &&
 &input&
+&&
 & Player&other  rolled:
-&& &die1  and &die2  and landed on tile &tileNR
-&& &tileT
 && &green &die1 &  and &green &die2 &  and landed on tile &green &tileNR & 
 && &tileT 
 &&
