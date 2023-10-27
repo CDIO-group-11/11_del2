@@ -20,7 +20,9 @@ public class Main {
   private static Player[] players = new Player[2];
   private static Scanner userInput = new Scanner(System.in);
   private static int previousPlayer;
+  public static boolean clean = false;
   public static void main(String[] args) {
+    clean = args.length > 0 && args[0].equals("clean");
     init(null);
     for (int i = 0; i < players.length; i++) {
       players[i] = new Player(i, 1000);
@@ -48,7 +50,7 @@ public class Main {
             Lang.moveToEnd();
             System.out.println();
             readingInput = false;
-            System.out.print("\rwhat should the save file be called:                  \033[17D");
+            System.out.print("\rwhat should the save file be called:" + (clean ? "" : "                  \033[17D"));
             Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
             System.exit(0);
             break;
@@ -58,7 +60,7 @@ public class Main {
         break;
       }
     }
-    System.out.print("\rsaving game\nwhat should the save file be called:                  \033[17D");
+    System.out.print("\rsaving game\nwhat should the save file be called:" + (clean ? "" : "                  \033[17D"));
     Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
   }
 

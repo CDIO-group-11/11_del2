@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import app.Main;
 import app.ValueReader;
 
 import java.util.HashMap;
@@ -165,23 +166,41 @@ public class Lang {
     return tiles[lang.ordinal()][tileNumber-2];
   }
   public static void moveToInput(){
+    if(Main.clean) return;
     System.out.print("\r\033[" + inputHeight + "A");
     System.out.print("\033[" + inputStart + "C");
   }
   public static void redoInput(){
+    if(Main.clean) return;
     System.out.print("\r\033[1A");
     System.out.print("\033[" + inputStart + "C");
   }
   public static void moveToStartFromInput(){
+    if(Main.clean){
+      System.out.println("\n".repeat(totalHeight - inputHeight + 1));
+      return;
+    }
     System.out.print("\r\033[" + (totalHeight - inputHeight + 1) + "A");
   }
   public static void moveToStart(){
+    if(Main.clean){
+      System.out.println("\n".repeat(totalHeight));
+      return;
+    }
     System.out.print("\r\033[" + totalHeight + "A");
   }
   public static void moveToEndFromInput(){
+    if(Main.clean) {
+      moveToStartFromInput();
+      return;
+    }
     System.out.print("\n".repeat(inputHeight));
   }
   public static void moveToEnd(){
+    if(Main.clean){
+      moveToStart();
+      return;
+    }
     System.out.print("\n".repeat(totalHeight));
   }
 
