@@ -1,17 +1,17 @@
 @ 11 &
 []
 
-@2 this is tile 1, located at 2, value = @
-@3 this is tile 2, located at 3, value = @
-@4 this is tile 3, located at 4, value = @
-@5 this is tile 4, located at 5, value = @
-@6 this is tile 5, located at 6, value = @
-@7 this is tile 6, located at 7, value = @
-@8 this is tile 7, located at 8, value = @
-@9 this is tile 8, located at 9, value = @
-@10 this is tile 9, located at 10, value = @
-@11 this is tile 10, located at 11, value = @
-@12 this is tile 11, located at 12, value = @
+@2 You found @ gold at the top of a tower.
+@3 You fell into a crater and lost @ gold.
+@4 You walked through the palace gates and magically received @ gold.
+@5 You arrived in a cold desert and had to pay @ gold for warm clothes.
+@6 You know the mayor of the walled city, he welcomes you with @ gold.
+@7 You come to a monastery but you are a sinner and are therefore thrown out again.
+@8 You enter a dark cave, a strange animal steals @ gold from you. 
+@9 You help the people in small cabins in the mountains and they thank you with @ gold.
+@10 You sacrifice @ gold to the warewall and turn into a werewolf, you now have an extra life.
+@11 You look down into a deep hole and drop your @ gold hat into the hole.
+@12 You find a gold mine filled with gold and take as much as you can hold +@.
 
 & Current turn: &turn 
 &&
