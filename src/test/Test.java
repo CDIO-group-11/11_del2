@@ -26,7 +26,8 @@ public class Test {
     responses.add(negativeGold(runCount));
     responses.add(werewall(runCount));
     responses.add(correctGold());
-    responses.add(exception());
+    responses.add(exception());    
+    responses.add(LangTest());
     
     System.out.print("\033[H\033[2J");
     System.out.flush();
@@ -176,4 +177,25 @@ public class Test {
     return new Fail("exception","the test exception is not specified");
   }
 
+  private static Response LangTest(){
+    long start = System.currentTimeMillis();
+    Lang.loadLang(LanguageCode.da);
+    Lang.loadLang(LanguageCode.en);
+    if(
+      Lang.getUI(LanguageCode.en) != null && 
+      Lang.getUI(LanguageCode.da) != null && 
+      !Lang.getUI(LanguageCode.en).equals(Lang.getUI(LanguageCode.da))
+    ){
+      long time = System.currentTimeMillis() - start;
+      return new Pass("LangTest","load 2 languages\n\t" + 
+    "loading of da: " + (Lang.getUI(LanguageCode.da) != null) + "\n\t" +
+    "loading of en: " + (Lang.getUI(LanguageCode.en) != null) + "\n\t" + 
+    "this took: " + time + "ms");
+    }
+    long time = System.currentTimeMillis() - start;
+    return new Fail("LangTest","failed to load 2 languages\n\t" + 
+    "loading of da: " + (Lang.getUI(LanguageCode.da) != null) + "\n\t" +
+    "loading of en: " + (Lang.getUI(LanguageCode.en) != null) + "\n\t" + 
+    "this took: " + time + "ms");
+  }
 }
