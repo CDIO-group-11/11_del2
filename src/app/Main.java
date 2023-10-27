@@ -21,11 +21,7 @@ public class Main {
   private static Scanner userInput = new Scanner(System.in);
   private static int previousPlayer;
   public static void main(String[] args) {
-    currentLanguage = Language.getLanguage(userInput);
-    ValueReader.loadValues();
-    ValueReader_for_ekstra_turn.loadValues();
-    Lang.loadLang(currentLanguage);
-    table = new Board(6, currentLanguage);
+    init(null);
     for (int i = 0; i < players.length; i++) {
       players[i] = new Player(i, 1000);
     }
@@ -64,6 +60,17 @@ public class Main {
     }
     System.out.print("\rsaving game\nwhat should the save file be called:                  \033[17D");
     Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
+  }
+
+  public static void init(LanguageCode lang) {
+    if(lang == null)
+      currentLanguage = Language.getLanguage(userInput);
+    else
+      currentLanguage = lang;
+    ValueReader.loadValues();
+    ValueReader_for_ekstra_turn.loadValues();
+    Lang.loadLang(currentLanguage);
+    table = new Board(6, currentLanguage);
   }
 /**
  * 
@@ -136,5 +143,9 @@ public class Main {
 
   public static int getCurrentPlayer(){
     return currentPlayer;
+  }
+
+  public static Player[] getplayers() {
+    return players;
   }
 }

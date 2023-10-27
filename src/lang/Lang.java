@@ -14,7 +14,7 @@ import lang.Language.LanguageCode;
 public class Lang {
   private static String[][] tiles = new String[LanguageCode.values().length][];
   private static String[] UserInterface = new String[LanguageCode.values().length];
-  private static HashMap<String,String> errors;
+  private static HashMap<String,String> errors = new HashMap<String,String>();
   private static int inputStart = 0;
   private static int inputHeight = 0;
   private static int totalHeight = 0;
@@ -103,7 +103,7 @@ public class Lang {
         }
         if(currentLine.charAt(0) == descriptorErrorStart){
           String[] all = currentLine.split(descriptorErrorEnd + "");
-          String name = all[0];
+          String name = all[0].replace("" + descriptorErrorStart, "");
           String message = "";
           for (int i = 1; i < all.length; i++) {
             message += all[i] + (i + 1 < all.length ? descriptorErrorStart + "" + descriptorErrorEnd : "");
@@ -142,19 +142,21 @@ public class Lang {
     }
     return input;
   }
-  public static void error(Exception e){
-    String[] out = errors.get(e.getClass().getSimpleName()).split("[]");
+  public static boolean error(Exception e){
+    String out = errors.get(e.getClass().getSimpleName());
     if(out == null){
       System.out.println("no translated message");
       e.printStackTrace();
-      return;
+      return false;
     }
-    for (int i = 0; i < out.length; i++) {
-      System.out.println(out[i]);
-      if(i + 1 < out.length){
+    String[] except = out.split("[\\[\\]]");
+    for (int i = 0; i < except.length; i++) {
+      System.out.println(except[i]);
+      if(i + 1 < except.length){
         e.printStackTrace();
       }
     }
+    return true;
   }
   public static String getUI(LanguageCode lang){
     return UserInterface[lang.ordinal()];

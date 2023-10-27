@@ -25,10 +25,12 @@ public class Test {
     responses.add(isFast(runCount));
     responses.add(negativeGold(runCount));
     responses.add(werewall(runCount));
+    responses.add(correctGold());
+    responses.add(exception());
     
-    System.out.println("\n".repeat(15));
     System.out.print("\033[H\033[2J");
     System.out.flush();
+    System.out.println("\n".repeat(2));
     int passes = 0;
     for (int i = 0; i < responses.size(); i++) {
       responses.get(i).print();
@@ -38,7 +40,7 @@ public class Test {
       "passed "  + passes + " out of " + responses.size() + " tests\n" + 
       "this is equivalent to a " + ((float) (passes * 100) / (float) responses.size() + "% pass rate")
     );
-    System.out.println("\n\ndetails:");
+    System.out.println("\ndetails:");
     for (int i = 0; i < responses.size(); i++) {
       responses.get(i).printData();
     }
@@ -64,11 +66,11 @@ public class Test {
     deviation = Math.sqrt(deviation / (double)(runCount * 2));
     double fairMean = (double)(1 + 2 + 3 + 4 + 5 + 6) / 6d;
     double fairDeviation = Math.sqrt(
-      Math.pow(1 - mean, 2) * (1d / 6d)+
-      Math.pow(2 - mean, 2) * (1d / 6d)+
-      Math.pow(3 - mean, 2) * (1d / 6d)+
-      Math.pow(4 - mean, 2) * (1d / 6d)+
-      Math.pow(5 - mean, 2) * (1d / 6d)+
+      Math.pow(1 - mean, 2) * (1d / 6d) +
+      Math.pow(2 - mean, 2) * (1d / 6d) +
+      Math.pow(3 - mean, 2) * (1d / 6d) +
+      Math.pow(4 - mean, 2) * (1d / 6d) +
+      Math.pow(5 - mean, 2) * (1d / 6d) +
       Math.pow(6 - mean, 2) * (1d / 6d)
     );
     String strMean = ("" + mean).length() <= 5 ? ("" + mean) : ("" + mean).substring(0,5);
@@ -100,7 +102,7 @@ public class Test {
     long end = 0;
     long start = System.currentTimeMillis();
     while (i < runCount) {
-      if(Main.turn(false)){
+      if(Main.turn(true)){
         Main.setData(new Board(6, currentLang),currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
       }
       i++;
@@ -155,4 +157,21 @@ public class Test {
     }
     return new Pass("werewall");
   }
+
+  private static Response correctGold(){
+    Main.init(currentLang);
+    Player[] players = Main.getplayers();
+    if(players[0].getGold() == 1000 && players[1].getGold() == 1000){
+      return new Fail("correctGold");
+    }
+    return new Pass("correctGold");
+  }
+
+  private static Response exception(){
+    if(Lang.error(new TestException("this is a test"))){
+      return new Pass("exception","the test exception is specified");
+    }
+    return new Fail("exception","the test exception is not specified");
+  }
+
 }
