@@ -22,8 +22,13 @@
 &&
 &input&
 & Player&other  rolled:
+&& &die1  and &die2  and landed on tile &tileNR
+&& &tileT
 && &green &die1 &  and &green &die2 &  and landed on tile &green &tileNR & 
 && &tileT 
 &&
 &&Player 1  gold: &yellow &gold1 &reset
 &&Player 2  gold: &yellow &gold2 &reset
+
+
+[TestException] this is a test and must be present

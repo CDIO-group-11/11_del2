@@ -11,6 +11,6 @@ public class Test_Board extends Board {
     this.finalSum = finalSum;
   }
   public Tile makeMove(){
-    return tiles[finalSum];
+    return tiles[finalSum-2];
   }
 }
