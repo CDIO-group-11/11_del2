@@ -10,10 +10,14 @@ public class Player {
     this.gold = startingGold;
     this.ID = ID;
   }
-  public boolean addGold(int gold){
-    this.gold += gold;
+  public boolean addGold(int Gold){
+    int prevGold = this.gold;
+    this.gold += Gold;
     if(this.gold < 0){
       this.gold = 0;
+    }
+    if(this.gold == prevGold){
+      return false;
     }
     return (this.gold > winningGold);
   }

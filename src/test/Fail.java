@@ -14,7 +14,7 @@ public class Fail implements Response {
 
   @Override
   public void print() {
-    System.out.println("\n" + test + (test.length()<8 ? "\t" : "") + "\t\u001b[31mFAILED\u001b[0m");
+    System.out.println(test + (test.length()<8 ? "\t" : "") + "\t\u001b[31mFAILED\u001b[0m");
   }
 
   @Override

@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import lang.Lang;
+
 public class ValueReader_for_ekstra_turn{
     private static ArrayList<Boolean> extraTurn = new ArrayList<Boolean>();
 
@@ -17,9 +19,9 @@ public class ValueReader_for_ekstra_turn{
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Lang.error(e);
         } catch (NumberFormatException e){
-            e.printStackTrace();
+            Lang.error(e);
         }
     }
     public static Boolean hasExtraTurn(int TileNumber){

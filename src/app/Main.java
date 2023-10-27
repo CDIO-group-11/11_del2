@@ -20,7 +20,9 @@ public class Main {
   private static Player[] players = new Player[2];
   private static Scanner userInput = new Scanner(System.in);
   private static int previousPlayer;
+  public static boolean clean = false;
   public static void main(String[] args) {
+    clean = args.length > 0 && args[0].equals("clean");
     init(null);
     for (int i = 0; i < players.length; i++) {
       players[i] = new Player(i, 1000);
@@ -32,7 +34,7 @@ public class Main {
       while (readingInput) {
         String in = userInput.nextLine();
         Lang.redoInput();
-        System.out.print(" ".repeat(in.length()));
+        System.out.print(" ".repeat(in.length() == 0 ? 1 : in.length()));
         System.out.print("\033["+ in.length() + "D");
         switch (in) {
           case ROLL_COMMAND:
@@ -48,8 +50,8 @@ public class Main {
             Lang.moveToEnd();
             System.out.println();
             readingInput = false;
-            System.out.print("\rwhat should the save file be called:                  \033[17D");
-            Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
+            System.out.print("\rwhat should the save file be called:" + (clean ? "" : "                  \033[17D"));
+            Save.state(players, userInput, currentLanguage);
             System.exit(0);
             break;
         }
@@ -58,8 +60,8 @@ public class Main {
         break;
       }
     }
-    System.out.print("\rsaving game\nwhat should the save file be called:                  \033[17D");
-    Save.state(players, new File("data/" + userInput.nextLine() + ".state"), currentLanguage);
+    System.out.print("\rsaving game\nwhat should the save file be called:" + (clean ? "" : "                  \033[17D"));
+    Save.state(players, userInput, currentLanguage);
   }
 
   public static void init(LanguageCode lang) {
@@ -79,19 +81,19 @@ public class Main {
   public static boolean turn(boolean print) {
     Tile currentTile = table.makeMove();
     Lang.moveToStartFromInput();
-    if(print)
-    PrintUI(currentTile);
-    Lang.moveToInput();
     previousPlayer = currentPlayer;
     if(players[currentPlayer].addGold(currentTile.value)){
       System.out.println("player " + currentPlayer + " wins!");
       return true;
     }
-      if(!currentTile.extraTurn){
-        currentPlayer++;
-        currentPlayer %= players.length;
-      }
-      turnNumber++;
+    if(!currentTile.extraTurn){
+      currentPlayer++;
+      currentPlayer %= players.length;
+    }
+    turnNumber++;
+    if(print)
+    PrintUI(currentTile);
+    Lang.moveToInput();
     return false;
   }
 
@@ -103,30 +105,30 @@ public class Main {
       UI = UI.replace("\uE003", " ");
       UI = UI.replace("\uE004", " ");
       UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
-      UI = UI.replace("\uE006", "" + players[0].getGold());
-      UI = UI.replace("\uE007", "" + players[1].getGold());
+      UI = UI.replace("\uE006", "" + players[0].getGold() + "   ");
+      UI = UI.replace("\uE007", "" + players[1].getGold() + "   ");
       UI = UI.replace("\uE008", "" + turnNumber);
       UI = UI.replace("\uE009", " ");
       UI = UI.replace("\uE00A", " ");
       UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
       UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
       UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
-      UI = UI.replace("\uE00E", "" + previousPlayer);
+      UI = UI.replace("\uE00E", "" + (previousPlayer + 1));
     }else{
       UI = UI.replace("\uE001", "" + (currentPlayer + 1));
       UI = UI.replace("\uE002", "" + table.getCup().getSides()[0]);
       UI = UI.replace("\uE003", "" + table.getCup().getSides()[1]);
       UI = UI.replace("\uE004", "" + (table.getCup().getSides()[0] + table.getCup().getSides()[1]) + "  ");
       UI = UI.replace("\uE005", "" + players[currentPlayer].getGold());
-      UI = UI.replace("\uE006", "" + players[0].getGold());
-      UI = UI.replace("\uE007", "" + players[1].getGold());
+      UI = UI.replace("\uE006", "" + players[0].getGold() + "   ");
+      UI = UI.replace("\uE007", "" + players[1].getGold() + "   ");
       UI = UI.replace("\uE008", "" + turnNumber);
       UI = UI.replace("\uE009", "" + currentTile.text + "  ");
       UI = UI.replace("\uE00A", "" + currentTile.number + "  ");
       UI = UI.replace("\uE00B", "" + ROLL_COMMAND);
       UI = UI.replace("\uE00C", "" + SAVE_COMMAND);
       UI = UI.replace("\uE00D", "" + EXIT_COMMAND);
-      UI = UI.replace("\uE00E", "" + previousPlayer);
+      UI = UI.replace("\uE00E", "" + (previousPlayer + 1));
     }
     System.out.println(UI);
   }
