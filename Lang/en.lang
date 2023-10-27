@@ -22,3 +22,5 @@
 & Player&other  rolled:
 && &die1  and &die2  and landed on tile &tileNR
 && &tileT
+
+[TestException] this is a test and must be present

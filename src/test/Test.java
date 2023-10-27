@@ -26,10 +26,11 @@ public class Test {
     responses.add(negativeGold(runCount));
     responses.add(werewall(runCount));
     responses.add(correctGold());
+    responses.add(exception());
     
-    System.out.println("\n".repeat(15));
     System.out.print("\033[H\033[2J");
     System.out.flush();
+    System.out.println("\n".repeat(2));
     int passes = 0;
     for (int i = 0; i < responses.size(); i++) {
       responses.get(i).print();
@@ -39,7 +40,7 @@ public class Test {
       "passed "  + passes + " out of " + responses.size() + " tests\n" + 
       "this is equivalent to a " + ((float) (passes * 100) / (float) responses.size() + "% pass rate")
     );
-    System.out.println("\n\ndetails:");
+    System.out.println("\ndetails:");
     for (int i = 0; i < responses.size(); i++) {
       responses.get(i).printData();
     }
@@ -101,7 +102,7 @@ public class Test {
     long end = 0;
     long start = System.currentTimeMillis();
     while (i < runCount) {
-      if(Main.turn(false)){
+      if(Main.turn(true)){
         Main.setData(new Board(6, currentLang),currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
       }
       i++;
@@ -165,4 +166,12 @@ public class Test {
     }
     return new Pass("correctGold");
   }
+
+  private static Response exception(){
+    if(Lang.error(new TestException("this is a test"))){
+      return new Pass("exception","the test exception is specified");
+    }
+    return new Fail("exception","the test exception is not specified");
+  }
+
 }
