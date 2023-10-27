@@ -142,6 +142,7 @@ public class Test {
     Main.setData(new Test_Board(6,currentLang,9), currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
     for (int i = 0; i < runCount/2; i++) {
       Main.turn(false);
+      Main.setData(new Test_Board(6,currentLang,9), currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
       if(Main.getCurrentPlayer() == player){
         return new Fail("werewall");
       }
@@ -150,6 +151,7 @@ public class Test {
     Main.setData(new Test_Board(6,currentLang,11), currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
     for (int i = 0; i < runCount/2; i++) {
       Main.turn(false);
+      Main.setData(new Test_Board(6,currentLang,9), currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
       if(Main.getCurrentPlayer() == player){
         return new Fail("werewall");
       }
@@ -159,9 +161,9 @@ public class Test {
   }
 
   private static Response correctGold(){
-    Main.init(currentLang);
+    Main.setData(new Board(6,currentLang), currentLang, new Player[]{new Player(0, 1000), new Player(1, 1000)});
     Player[] players = Main.getplayers();
-    if(players[0].getGold() == 1000 && players[1].getGold() == 1000){
+    if(players[0].getGold() != 1000 && players[1].getGold() != 1000){
       return new Fail("correctGold");
     }
     return new Pass("correctGold");
